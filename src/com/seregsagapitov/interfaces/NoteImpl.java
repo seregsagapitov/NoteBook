@@ -13,8 +13,8 @@ public interface NoteImpl {
     void update(Note note);
 
     //Удалить запись
-    void delete (Note note);
+    void delete (ArrayList<Note> notes);
 
     //Переместить запись
-    void replace(Note note, String newTable);
+    void replace(ArrayList<Note> notes, String newTable);
 }

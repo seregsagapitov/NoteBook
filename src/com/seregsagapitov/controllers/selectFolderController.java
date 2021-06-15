@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import javax.swing.text.TabableView;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class selectFolderController {
@@ -67,11 +68,13 @@ public class selectFolderController {
 
             if (Controller.replaceOn == true) {
 
-                Note note = tableNote.getSelectionModel().getSelectedItem();
-                System.out.println("## Выбранная запись " + note.getNoteText());
+                ObservableList<Note> selectedNotes = tableNote.getSelectionModel().getSelectedItems();
+                ArrayList<Note> rows = new ArrayList<>(selectedNotes);
+
                 String newTable = (String) Controller.dataTable.keySet().toArray()[(int) o];
                 System.out.println("Перемещаем в выбранную папку " + newTable);
-                collectionNote.replace(note, newTable);
+                collectionNote.replace(rows, newTable);
+
                 Controller.currentTable = newTable;
                 Controller.replaceOn = false;
             }

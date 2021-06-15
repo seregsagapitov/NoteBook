@@ -334,10 +334,12 @@ public class Controller {
     void delNote(ActionEvent event) {
         ObservableList<Note> selectedNotes = tableNote.getSelectionModel().getSelectedItems();
         ArrayList<Note> rows = new ArrayList<>(selectedNotes);
-        for (Note row : rows) {
-            collectionNote.delete(row);
 
-        }
+        collectionNote.delete(rows);
+//        for (Note row : rows) {
+//            collectionNote.delete(row);
+//
+//        }
     }
 
 

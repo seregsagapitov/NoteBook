@@ -42,9 +42,9 @@ public class CollectionNote implements NoteImpl {
     }
 
     @Override
-    public void delete(Note note) {
+    public void delete(ArrayList<Note> notes) {
         try {
-            deleteData(note);
+            deleteData(notes);
             showData(noteList);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,10 +53,10 @@ public class CollectionNote implements NoteImpl {
     }
 
     @Override
-    public void replace(Note note, String newTable) {
+    public void replace(ArrayList<Note> notes, String newTable) {
 
         try {
-            replaceFrom(note, newTable);
+            replaceFrom(notes, newTable);
             showData(noteList);
         } catch (SQLException e) {
             e.printStackTrace();
