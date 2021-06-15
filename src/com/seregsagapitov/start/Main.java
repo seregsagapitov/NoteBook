@@ -12,9 +12,7 @@ import javafx.stage.Stage;
 import sun.security.util.Password;
 
 public class Main extends Application {
-//////FFFF
-    ////AAAAA
-    ///fffdfdfddf
+///S
 
     @Override
     public void start(Stage primaryStage) throws Exception {
