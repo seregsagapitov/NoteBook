@@ -103,6 +103,7 @@ public class Controller {
 
     static {
         dataTable.put("NOTES", "Мои заметки");
+        dataTable.put("RECYCLED", "Корзина");
         currentTable = "NOTES";
         //dataTable.put(currentTable, "пум-пурум");
     }
@@ -111,7 +112,7 @@ public class Controller {
     private void initialize() throws SQLException, IOException {
         System.out.println(ConnectDB.selectPassword());
 
-        if (currentTable == "NOTES") {
+        if (currentTable == "NOTES" && currentTable == "RECYCLED") {
             menuButton_folder.getItems().get(1).setDisable(true);
         } else {
             menuButton_folder.getItems().get(1).setDisable(false);
@@ -160,6 +161,17 @@ public class Controller {
                         public void handle(ActionEvent event) {
                             if (item.getText().equals("Выбор папки")) {
                                 selectFolderMenu(event);
+                            }
+                            if (item.getText().equals("Корзина")) {
+                                currentTable = "RECYCLED";
+                                try {
+                                    ConnectDB.showData(CollectionNote.noteList);
+                                } catch (SQLException throwables) {
+                                    throwables.printStackTrace();
+                                }
+                                columnNotes.setText(Controller.dataTable.get(Controller.currentTable));
+                                menuButton_folder.getItems().get(1).setDisable(true);
+
                             }
                             if (item.getText().equals("Выбор цвета")) {
                                 try {

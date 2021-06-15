@@ -34,6 +34,14 @@ public class ConnectDB {
                     "    NOT NULL,\n" +
                     "    PASS    VARCHAR (256) NOT NULL\n" +
                     ");");
+            stmt.execute("CREATE TABLE IF NOT EXISTS RECYCLED (\n" +
+                    "    ID       INTEGER        PRIMARY KEY AUTOINCREMENT\n" +
+                    "     UNIQUE\n" +
+                    "    NOT NULL,\n" +
+                    "    NOTETEXT VARCHAR (8192) NOT NULL,\n" +
+                    "    DATE     VARCHAR (256)  NOT NULL\n" +
+                    ");");
+
 
 //            CREATE TABLE NAMES (
 //                    ID_NAMES   INT (32)      PRIMARY KEY

@@ -81,7 +81,7 @@ public class selectFolderController {
                 ConnectDB.showData(CollectionNote.noteList);
                 columnNotesSelectFolder.setText(Controller.dataTable.get(Controller.currentTable));
 
-                if (Controller.currentTable != "NOTES") {
+                if (Controller.currentTable != "NOTES" && Controller.currentTable != "RECYCLED") {
                     menuButton_folder_1.getItems().get(1).setDisable(false);
                 } else {
                     menuButton_folder_1.getItems().get(1).setDisable(true);
