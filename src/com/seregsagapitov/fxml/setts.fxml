@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+
+<AnchorPane fx:id="MainField" minWidth="-Infinity" prefHeight="294.0" prefWidth="260.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seregsagapitov.controllers.SettingsController">
+    <children>
+        <Text layoutX="101.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Настройки" textAlignment="CENTER" wrappingWidth="124.13671875" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="10.0">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Text>
+        <VBox layoutX="14.0" layoutY="36.0" prefHeight="187.0" prefWidth="314.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+            <children>
+                <AnchorPane prefHeight="42.0" prefWidth="284.0">
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                    <children>
+                        <Text layoutX="19.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Пароль" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Text>
+                        <PasswordField fx:id="settingPassword" layoutX="102.0" layoutY="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="31.0" prefWidth="284.0">
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                    <children>
+                        <Text layoutX="26.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Размер шрифта" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Text>
+                        <ComboBox fx:id="settingFont" layoutX="119.0" layoutY="5.0" prefHeight="25.0" prefWidth="65.0" promptText="px" AnchorPane.rightAnchor="0.0">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="8" />
+                                    <String fx:value="9" />
+                                    <String fx:value="10" />
+                                    <String fx:value="11" />
+                                    <String fx:value="12" />
+                                    <String fx:value="13" />
+                                    <String fx:value="14" />
+                                    <String fx:value="16" />
+                                </FXCollections>
+                            </items>
+                            <cursor>
+                                <Cursor fx:constant="DEFAULT" />
+                            </cursor>
+                        </ComboBox>
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="46.0" prefWidth="304.0">
+                    <children>
+                        <Text layoutX="20.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Темы" wrappingWidth="38.4609375" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Text>
+                        <ComboBox fx:id="Themes" layoutX="119.0" layoutY="5.0" prefHeight="25.0" prefWidth="124.0" AnchorPane.rightAnchor="0.0">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Без темы" />
+                                    <String fx:value="DarkTheme" />
+                                    <String fx:value="LightTheme" />
+                                </FXCollections>
+                            </items>
+                            <cursor>
+                                <Cursor fx:constant="DEFAULT" />
+                            </cursor>
+                        </ComboBox>
+
+
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                </AnchorPane>
+            </children>
+        </VBox>
+        <Button fx:id="CloseSaveButton" layoutX="14.0" layoutY="247.0" mnemonicParsing="false" onAction="#CloseSaveSettings" text="Закрыть" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" />
+        <Button fx:id="CancelSettingsButton" layoutX="158.0" layoutY="249.0" mnemonicParsing="false" onAction="#CancelSettings" text="Отмена" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="10.0" />
+    </children>
+</AnchorPane>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane fx:id="MainAnchorPain" prefHeight="500.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seregsagapitov.controllers.NewNoteController">
+   <children>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="316.0">
+         <children>
+            <HBox>
+               <children>
+                  <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#actionAdd" prefHeight="30.0" prefWidth="132.0" text="Добавить запись">
+                     <HBox.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnClose" cancelButton="true" mnemonicParsing="false" onAction="#cancelButton" prefHeight="25.0" prefWidth="70.0" text="Отмена">
+                     <HBox.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <AnchorPane prefHeight="347.0" prefWidth="316.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <TextArea fx:id="textAreaFX" layoutX="68.0" layoutY="39.0" prefHeight="329.0" prefWidth="316.0" wrapText="true" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font></TextArea>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
