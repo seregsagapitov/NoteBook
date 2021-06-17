@@ -22,11 +22,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.zip.*;
 
 public class Controller {
 
@@ -68,6 +70,11 @@ public class Controller {
     private MenuButton menuButton_folder;
     @FXML
     private AnchorPane MainAnchorPain;
+
+    @FXML
+    private MenuItem exportZipItem;
+
+
     @FXML
     private PasswordField setPass;
     @FXML
@@ -172,6 +179,10 @@ public class Controller {
                                 columnNotes.setText(Controller.dataTable.get(Controller.currentTable));
                                 menuButton_folder.getItems().get(1).setDisable(true);
 
+                            }
+
+                            if (item.getText().equals("Отправить в Zip архив...")) {
+                                exportToZipFile(event);
                             }
                             if (item.getText().equals("Выбор цвета")) {
                                 try {
@@ -415,6 +426,51 @@ public class Controller {
 //            e.printStackTrace();
 //        }
 //    }
+
+    @FXML
+    void exportToZipFile(ActionEvent event) {
+
+        String fileName1 = "";
+        System.out.println(dataTable.get(currentTable) + " : " + collectionNote.getNoteList().get(0).getNoteText() + " /// " + collectionNote.getNoteList().get(0).getCurrentMoment() );
+        try {
+            fileName1 = dataTable.get(currentTable) + ".txt";
+            FileWriter fileWriter = new FileWriter(fileName1);
+            fileWriter.write(collectionNote.getNoteList().get(0).getNoteText() + " /// " + collectionNote.getNoteList().get(0).getCurrentMoment());
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String fileName = "zipFile.zip";
+        try {
+            FileOutputStream zipFile = new FileOutputStream(fileName);
+           // CheckedOutputStream csum = new CheckedOutputStream(zipFile, new CRC32());
+            ZipOutputStream zipOutputStream = new ZipOutputStream(zipFile);
+
+
+            BufferedOutputStream out = new BufferedOutputStream(zipOutputStream);
+            zipOutputStream.setComment("Создание архива Java");
+            BufferedReader in = new BufferedReader(new FileReader(fileName1));
+            zipOutputStream.putNextEntry(new ZipEntry(fileName1));
+            int c;
+            while ((c = in.read()) != -1)
+                out.write(c);
+                in.close();
+                out.flush();
+
+
+            out.close();
+
+
+            zipOutputStream.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
     @FXML

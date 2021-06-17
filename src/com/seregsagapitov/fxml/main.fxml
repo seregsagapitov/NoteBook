@@ -21,7 +21,7 @@
                       <MenuItem fx:id="listFolders" mnemonicParsing="false" onAction="#choiseFolder" text="О программе" />
                         <MenuItem fx:id="listFolders1" mnemonicParsing="false" onAction="#choiseFolder" text="Выбор папки" />
                         <MenuItem mnemonicParsing="false" text="Корзина" />
-                        <MenuItem fx:id="listFolders11" mnemonicParsing="false" onAction="#choiseFolder" text="Отправить в Zip архив..." />
+                        <MenuItem fx:id="exportZipItem" mnemonicParsing="false" onAction="#exportToZipFile" text="Отправить в Zip архив..." />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                       <MenuItem fx:id="colourMenu" mnemonicParsing="false" onAction="#choiseColour" text="Выбор цвета" />
