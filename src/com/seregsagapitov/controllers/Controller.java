@@ -24,8 +24,11 @@ import javafx.stage.Window;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.zip.*;
@@ -432,46 +435,76 @@ public class Controller {
 
         String fileName1 = "";
         System.out.println(dataTable.get(currentTable) + " : " + collectionNote.getNoteList().get(0).getNoteText() + " /// " + collectionNote.getNoteList().get(0).getCurrentMoment() );
+
+        Path path = Paths.get(dataTable.get(currentTable));
         try {
-            fileName1 = dataTable.get(currentTable) + ".txt";
-            FileWriter fileWriter = new FileWriter(fileName1);
-            fileWriter.write(collectionNote.getNoteList().get(0).getNoteText() + " /// " + collectionNote.getNoteList().get(0).getCurrentMoment());
-            fileWriter.close();
+            for (int i = 0; i < collectionNote.getNoteList().size(); i++) {
+
+                try {
+                    Files.createDirectories(path);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (collectionNote.getNoteList().get(i).getNoteText().length() > 7){
+                fileName1 = collectionNote.getNoteList().get(i).getNoteText().substring(0, 7) + ".txt";}
+                else {fileName1 = collectionNote.getNoteList().get(i).getNoteText() + ".txt";}
+
+                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path + "/" + fileName1 + ".txt"), 8192);
+                bufferedWriter.write(collectionNote.getNoteList().get(i).getCurrentMoment() + "\n" + collectionNote.getNoteList().get(i).getNoteText());
+                bufferedWriter.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        String fileName = "zipFile.zip";
+        String zipFile = path.toString() + ".zip";
         try {
-            FileOutputStream zipFile = new FileOutputStream(fileName);
-           // CheckedOutputStream csum = new CheckedOutputStream(zipFile, new CRC32());
-            ZipOutputStream zipOutputStream = new ZipOutputStream(zipFile);
-
-
-            BufferedOutputStream out = new BufferedOutputStream(zipOutputStream);
-            zipOutputStream.setComment("Создание архива Java");
-            BufferedReader in = new BufferedReader(new FileReader(fileName1));
-            zipOutputStream.putNextEntry(new ZipEntry(fileName1));
-            int c;
-            while ((c = in.read()) != -1)
-                out.write(c);
-                in.close();
-                out.flush();
-
-
-            out.close();
-
-
-            zipOutputStream.close();
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            Zip(path.toString(), zipFile);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
+    private  void Zip(String source_dir, String zip_file) throws Exception {
+        // Cоздание объекта ZipOutputStream из FileOutputStream
+        FileOutputStream fout = new FileOutputStream(zip_file);
+        ZipOutputStream zout = new ZipOutputStream(fout);
+        zout.setLevel(Deflater.BEST_COMPRESSION);
 
+
+        // Создание объекта File object архивируемой директории
+        File fileSource = new File(source_dir);
+        addDirectory(zout, fileSource);
+        // Закрываем ZipOutputStream
+        zout.close();
+        System.out.println("Zip файл создан!");
+    }
+
+    private  void addDirectory(ZipOutputStream zout, File fileSource)
+            throws Exception {
+        File[] files = fileSource.listFiles();
+        System.out.println("Добавление директории <" + fileSource.getName() + ">");
+        for (int i = 0; i < files.length; i++) {
+            // Если file является директорией, то рекурсивно вызываем
+            // метод addDirectory
+            if (files[i].isDirectory()) {
+                addDirectory(zout, files[i]);
+                continue;
+            }
+            System.out.println("Добавление файла <" + files[i].getName() + ">");
+
+            FileInputStream fis = new FileInputStream(files[i]);
+
+            zout.putNextEntry(new ZipEntry(files[i].getPath()));
+
+            byte[] buffer = new byte[4048];
+            int length;
+            while ((length = fis.read(buffer)) > 0)
+                zout.write(buffer, 0, length);
+            // Закрываем ZipOutputStream и InputStream
+            zout.closeEntry();
+            fis.close();
+        }
+    }
 
     @FXML
     void OnActionMenuButton_folder(ActionEvent event) {
