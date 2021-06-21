@@ -19,14 +19,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.charset.Charset;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -436,6 +437,15 @@ public class Controller {
 
     @FXML
     void exportToZipFile(ActionEvent event) {
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+
+        directoryChooser.setTitle("Выбор папки для Zip-архива");
+
+        File selectedDir = directoryChooser.showDialog(tableNote.getScene().getWindow());
+
+
+
         Path pathRoot = Paths.get("Notebook");
         try {
             Files.createDirectory(pathRoot);
@@ -448,7 +458,12 @@ public class Controller {
 
         ConnectDB.connect();
         for (Map.Entry<String, String> entry : dataTable.entrySet()) {
-            Path path = Paths.get(dataTable.get(entry.getKey()));
+            Path path = Paths.get(pathRoot + "/" + dataTable.get(entry.getKey()));
+//            try {
+//                //Files.createDirectory(Paths.get(pathRoot + "/" + path));
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
             System.out.println("Key: " + entry.getKey() + " Value: " + entry.getValue());
             try {
                 Statement stmt = ConnectDB.connection.createStatement();
@@ -479,8 +494,7 @@ public class Controller {
                     } else {
                         fileName1 = noteList.get(i).getNoteText() + ".txt";
                     }
-
-                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathRoot+ "/" +path + "/" + fileName1), 8192);
+                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path + "/" + fileName1), 8192);
                     bufferedWriter.write(noteList.get(i).getCurrentMoment() + "\n" + noteList.get(i).getNoteText());
                     bufferedWriter.close();
                 }
@@ -491,9 +505,27 @@ public class Controller {
             noteList.clear();
         }
         ConnectDB.disconnect();
-        String zipFile = pathRoot.toString() + ".zip";
+        String zipFile = selectedDir + "/" + pathRoot + ".zip";
         try {
             Zip(pathRoot.toString(), zipFile);
+
+
+
+            // Удаление созданного каталога
+            Files.walkFileTree(pathRoot, new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    Files.delete(file);
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc)
+                        throws IOException {
+                    Files.delete(dir);
+                    return FileVisitResult.CONTINUE;
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -511,6 +543,7 @@ public class Controller {
         File fileSource = new File(source_dir);
         addDirectory(zout, fileSource);
         // Закрываем ZipOutputStream
+        zout.closeEntry();
         zout.close();
         System.out.println("Zip файл создан!");
     }
