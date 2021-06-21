@@ -5,6 +5,7 @@ import com.seregsagapitov.interfaces.impls.CollectionNote;
 import com.seregsagapitov.objects.Note;
 import com.seregsagapitov.start.Main;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,7 +27,10 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
@@ -432,39 +436,71 @@ public class Controller {
 
     @FXML
     void exportToZipFile(ActionEvent event) {
-
-        String fileName1 = "";
-        System.out.println(dataTable.get(currentTable) + " : " + collectionNote.getNoteList().get(0).getNoteText() + " /// " + collectionNote.getNoteList().get(0).getCurrentMoment() );
-
-        Path path = Paths.get(dataTable.get(currentTable));
+        Path pathRoot = Paths.get("Notebook");
         try {
-            for (int i = 0; i < collectionNote.getNoteList().size(); i++) {
-
-                try {
-                    Files.createDirectories(path);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (collectionNote.getNoteList().get(i).getNoteText().length() > 7){
-                fileName1 = collectionNote.getNoteList().get(i).getNoteText().substring(0, 7) + ".txt";}
-                else {fileName1 = collectionNote.getNoteList().get(i).getNoteText() + ".txt";}
-
-                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path + "/" + fileName1 + ".txt"), 8192);
-                bufferedWriter.write(collectionNote.getNoteList().get(i).getCurrentMoment() + "\n" + collectionNote.getNoteList().get(i).getNoteText());
-                bufferedWriter.close();
-            }
+            Files.createDirectory(pathRoot);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String zipFile = path.toString() + ".zip";
+        String notetext = "";
+        String currentMoment = "";
+        ObservableList<Note> noteList = FXCollections.observableArrayList();
+
+        ConnectDB.connect();
+        for (Map.Entry<String, String> entry : dataTable.entrySet()) {
+            Path path = Paths.get(dataTable.get(entry.getKey()));
+            System.out.println("Key: " + entry.getKey() + " Value: " + entry.getValue());
+            try {
+                Statement stmt = ConnectDB.connection.createStatement();
+                String query = "SELECT * FROM " + entry.getKey() + " ;";
+                ResultSet rs = stmt.executeQuery(query);
+
+                while (rs.next()) {
+
+                    noteList.add(new Note(rs.getString("NOTETEXT"), rs.getString("DATE"), rs.getInt("ID")));
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+            String fileName1 = "";
+
+
+            try {
+                for (int i = 0; i < noteList.size(); i++) {
+
+                    try {
+                        Files.createDirectories(path);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    if (noteList.get(i).getNoteText().length() > 7) {
+                        fileName1 = noteList.get(i).getNoteText().substring(0, 7) + ".txt";
+                    } else {
+                        fileName1 = noteList.get(i).getNoteText() + ".txt";
+                    }
+
+                    BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathRoot+ "/" +path + "/" + fileName1), 8192);
+                    bufferedWriter.write(noteList.get(i).getCurrentMoment() + "\n" + noteList.get(i).getNoteText());
+                    bufferedWriter.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            noteList.clear();
+        }
+        ConnectDB.disconnect();
+        String zipFile = pathRoot.toString() + ".zip";
         try {
-            Zip(path.toString(), zipFile);
+            Zip(pathRoot.toString(), zipFile);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-    private  void Zip(String source_dir, String zip_file) throws Exception {
+
+    private void Zip(String source_dir, String zip_file) throws Exception {
         // Cоздание объекта ZipOutputStream из FileOutputStream
         FileOutputStream fout = new FileOutputStream(zip_file);
         ZipOutputStream zout = new ZipOutputStream(fout);
@@ -479,7 +515,7 @@ public class Controller {
         System.out.println("Zip файл создан!");
     }
 
-    private  void addDirectory(ZipOutputStream zout, File fileSource)
+    private void addDirectory(ZipOutputStream zout, File fileSource)
             throws Exception {
         File[] files = fileSource.listFiles();
         System.out.println("Добавление директории <" + fileSource.getName() + ">");

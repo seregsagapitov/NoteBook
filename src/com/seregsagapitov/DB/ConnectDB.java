@@ -9,7 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ConnectDB {
-    private static Connection connection;
+    public static Connection connection;
     private static Statement stmt;
     private static PreparedStatement ps;
 
