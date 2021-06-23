@@ -145,6 +145,24 @@ public class ConnectDB {
 //        disconnect();
 //    }
 
+    // Очистка корзины
+    public static void deleteFromRecycled() {
+        connect();
+        String sql1 = "DROP TABLE " + (Controller.currentTable) +";";
+
+        try {
+            stmt = connection.createStatement();
+            stmt.execute(sql1);
+           // stmt.execute(sql2);
+            stmt.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        disconnect();
+
+
+    }
+
 
     // Удаление данных из БД (Из Текущей таблицы)
     public static void deleteData(ArrayList<Note> notes) throws SQLException {
@@ -221,19 +239,19 @@ public class ConnectDB {
 
     public static void replaceFrom(ArrayList<Note> notes, String newTable) throws SQLException {
         connect();
-                connection.setAutoCommit(false);
-                for (Note selectNotes : notes) {
-                    int idNote = selectNotes.getId();
-                    String sqlReplace1 = "INSERT INTO " + newTable + "  (NOTETEXT, DATE) SELECT NOTETEXT, DATE FROM " + Controller.currentTable + " WHERE ID=?;";
-                    String sqlReplace2 = "DELETE FROM " + Controller.currentTable + " WHERE ID = ?";
+        connection.setAutoCommit(false);
+        for (Note selectNotes : notes) {
+            int idNote = selectNotes.getId();
+            String sqlReplace1 = "INSERT INTO " + newTable + "  (NOTETEXT, DATE) SELECT NOTETEXT, DATE FROM " + Controller.currentTable + " WHERE ID=?;";
+            String sqlReplace2 = "DELETE FROM " + Controller.currentTable + " WHERE ID = ?";
 
-                    ps = connection.prepareStatement(sqlReplace1);
-                    ps.setInt(1, idNote);
-                    ps.executeUpdate();
-                    ps = connection.prepareStatement(sqlReplace2);
-                    ps.setInt(1, idNote);
-                    ps.executeUpdate();
-                }
+            ps = connection.prepareStatement(sqlReplace1);
+            ps.setInt(1, idNote);
+            ps.executeUpdate();
+            ps = connection.prepareStatement(sqlReplace2);
+            ps.setInt(1, idNote);
+            ps.executeUpdate();
+        }
         connection.commit();
         connection.setAutoCommit(true);
         System.out.println("Перемещаемые строки " + notes.toArray());

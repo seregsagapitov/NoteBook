@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import sun.security.util.Password;
 
 public class Main extends Application {
-///SAAA
+///24/06/2021 1:58
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -23,7 +23,7 @@ public class Main extends Application {
             //primaryStage.initStyle(StageStyle.TRANSPARENT);
             primaryStage.setTitle("NoteBook");
             primaryStage.setResizable(false);
-            Scene scene = new Scene(root, 300, 510);
+            Scene scene = new Scene(root, 300, 530);
             //scene.setFill(Color.TRANSPARENT);
             primaryStage.setScene(scene);
             primaryStage.show();

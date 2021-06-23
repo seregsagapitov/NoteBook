@@ -21,8 +21,10 @@ public class selectFolderController {
     public TableColumn<Note, String> columnNotesSelectFolder;
     public MenuButton menuButton_folder_1;
     TableView<Note> tableNote;
-    Controller controller;
-    CollectionNote collectionNote = new CollectionNote();
+       CollectionNote collectionNote = new CollectionNote();
+    Button delButton;
+    Button addButton;
+    Button clearRecButton;
 
 
     @FXML
@@ -84,11 +86,30 @@ public class selectFolderController {
                 ConnectDB.showData(CollectionNote.noteList);
                 columnNotesSelectFolder.setText(Controller.dataTable.get(Controller.currentTable));
 
+                if (Controller.currentTable != "RECYCLED") {
+                    addButton.setDisable(false);
+                    delButton.setDisable(false);
+                    clearRecButton.setVisible(false);
+                }
+                else {addButton.setDisable(true);
+                    delButton.setDisable(true);
+                    clearRecButton.setVisible(true);
+//                    if (collectionNote.getNoteList().isEmpty()){
+//                        clearRecButton.setDisable(false);
+//                    }
+
+                    }
+
                 if (Controller.currentTable != "NOTES" && Controller.currentTable != "RECYCLED") {
                     menuButton_folder_1.getItems().get(1).setDisable(false);
+
                 } else {
                     menuButton_folder_1.getItems().get(1).setDisable(true);
+
                 }
+
+
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }

@@ -60,6 +60,9 @@ public class Controller {
     @FXML
     private Button newFolderButton;
 
+    @FXML
+    Button clearRecButton;
+
     public TableView<Note> getTableNote() {
         return tableNote;
     }
@@ -69,9 +72,9 @@ public class Controller {
     @FXML
     private TableColumn<Note, String> columnNotes;
     @FXML
-    private Button delButton;
+     Button delButton;
     @FXML
-    private Button addButton;
+    Button addButton;
     @FXML
     private Button replaceButton;
     @FXML
@@ -127,11 +130,12 @@ public class Controller {
     private void initialize() throws SQLException, IOException {
         System.out.println(ConnectDB.selectPassword());
 
-        if (currentTable == "NOTES" && currentTable == "RECYCLED") {
+        if (currentTable == "NOTES" || currentTable == "RECYCLED") {
             menuButton_folder.getItems().get(1).setDisable(true);
         } else {
             menuButton_folder.getItems().get(1).setDisable(false);
         }
+        clearRecButton.setVisible(false);
 
 
         tableNote.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -186,6 +190,11 @@ public class Controller {
                                 }
                                 columnNotes.setText(Controller.dataTable.get(Controller.currentTable));
                                 menuButton_folder.getItems().get(1).setDisable(true);
+
+                                delButton.setDisable(true);
+                                addButton.setDisable(true);
+                                clearRecButton.setVisible(true);
+
 
                             }
 
@@ -339,7 +348,9 @@ public class Controller {
                     Scene scene = new Scene(root);
                     ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
                     editController = loader.getController();
-                } catch (IOException e) {
+
+
+                }catch (IOException e) {
                     e.printStackTrace();
                 }
                 Note selectedItem = (Note) tableNote.getSelectionModel().getSelectedItem();
@@ -390,6 +401,9 @@ public class Controller {
             selectFolderController.columnNotesSelectFolder = columnNotes;
             selectFolderController.menuButton_folder_1 = menuButton_folder;
             selectFolderController.tableNote = tableNote;
+            selectFolderController.addButton = addButton;
+            selectFolderController.delButton = delButton;
+            selectFolderController.clearRecButton = clearRecButton;
 
             for (Map.Entry<String, String> entry : dataTable.entrySet()) {
                 String value = String.valueOf(entry.getValue());
@@ -435,6 +449,8 @@ public class Controller {
 //        }
 //    }
 
+
+    // Сохранение данных приложения в Zip-файл
     @FXML
     void exportToZipFile(ActionEvent event) {
 
@@ -443,7 +459,6 @@ public class Controller {
         directoryChooser.setTitle("Выбор папки для Zip-архива");
 
         File selectedDir = directoryChooser.showDialog(tableNote.getScene().getWindow());
-
 
 
         Path pathRoot = Paths.get("Notebook");
@@ -509,8 +524,6 @@ public class Controller {
         try {
             Zip(pathRoot.toString(), zipFile);
 
-
-
             // Удаление созданного каталога
             Files.walkFileTree(pathRoot, new SimpleFileVisitor<Path>() {
                 @Override
@@ -529,7 +542,6 @@ public class Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private void Zip(String source_dir, String zip_file) throws Exception {
@@ -573,6 +585,19 @@ public class Controller {
             zout.closeEntry();
             fis.close();
         }
+    }
+
+    // Метод очистки корзины (безвозвратное удаление данных)
+    @FXML
+    void clearRecycled(ActionEvent event) {
+        ConnectDB.deleteFromRecycled();
+        try {
+            ConnectDB.showData(collectionNote.getNoteList());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
     }
 
     @FXML
