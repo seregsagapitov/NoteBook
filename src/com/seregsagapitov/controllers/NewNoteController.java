@@ -26,6 +26,7 @@ public class NewNoteController {
     @FXML
     private TextArea textAreaFX;
 
+
     void actionClose(ActionEvent event) {
         Parent root = null;
         try {

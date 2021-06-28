@@ -24,6 +24,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import java.awt.event.MouseEvent;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.*;
@@ -32,10 +33,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.zip.*;
 
 public class Controller {
@@ -66,13 +64,13 @@ public class Controller {
     public TableView<Note> getTableNote() {
         return tableNote;
     }
-
+    TextArea textAreaFX;
     @FXML
     private TableView<Note> tableNote;
     @FXML
     private TableColumn<Note, String> columnNotes;
     @FXML
-     Button delButton;
+    Button delButton;
     @FXML
     Button addButton;
     @FXML
@@ -329,33 +327,52 @@ public class Controller {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/newNote.fxml"));
             root = loader.load();
             newNoteController = loader.getController();
+            //newNoteController.textAreaFX = textAreaFX;
             Scene scene = new Scene(root);
             ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
+            //textAreaFX.requestFocus();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    void openEditWindow() {
+    void openEditWindow(){
         tableNote.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 Parent root = null;
 
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/editNote.fxml"));
-                    root = loader.load();
-                    Scene scene = new Scene(root);
-                    ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
-                    editController = loader.getController();
+               if (tableNote.getSelectionModel().getSelectedItem() != null) {
+                   try {
+                       FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/editNote.fxml"));
+                       root = loader.load();
+                       Scene scene = new Scene(root);
+                       ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
+                       editController = loader.getController();
 
 
-                }catch (IOException e) {
-                    e.printStackTrace();
-                }
-                Note selectedItem = (Note) tableNote.getSelectionModel().getSelectedItem();
-                editController.setNote(selectedItem);
-                System.out.println(tableNote.getSelectionModel().getSelectedItem());
+                   } catch (IOException e) {
+                       e.printStackTrace();
+                   }
+
+                   Note selectedItem = (Note) tableNote.getSelectionModel().getSelectedItem();
+                   editController.setNote(selectedItem);
+                   System.out.println(tableNote.getSelectionModel().getSelectedItem());
+               }
+               else {
+                   Parent root1 = null;
+                   try {
+                       FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/newNote.fxml"));
+                       root1 = loader.load();
+                       newNoteController = loader.getController();
+                       Scene scene = new Scene(root1);
+                       ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
+                   } catch (IOException e) {
+                       e.printStackTrace();
+                   }
+               }
+
+
             }
         });
     }
@@ -542,6 +559,7 @@ public class Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        createAlertMessage("Создание Zip-архива", "Zip-архив " + Paths.get(zipFile).getFileName() + " успешно создан!", "Размер архива: " + new File(zipFile).length() + " байт");
     }
 
     private void Zip(String source_dir, String zip_file) throws Exception {
@@ -586,16 +604,40 @@ public class Controller {
             fis.close();
         }
     }
+    // Создание информационного окна
+
+    void createAlertMessage(String title, String headerText, String contentText) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
+    }
+
+
 
     // Метод очистки корзины (безвозвратное удаление данных)
     @FXML
     void clearRecycled(ActionEvent event) {
-        ConnectDB.deleteFromRecycled();
-        try {
-            ConnectDB.showData(collectionNote.getNoteList());
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        int sizeRecycled = collectionNote.getNoteList().size();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Корзина");
+        alert.setHeaderText("Все файлы корзины будут удалены безвовратно");
+        alert.setContentText("Вы хотите очистить корзину?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            ConnectDB.deleteFromRecycled();
+            try {
+                ConnectDB.showData(collectionNote.getNoteList());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            createAlertMessage("Корзина очищена", "Корзина успешно очищена!", "Удалено " + sizeRecycled + " записей(сь)");
+        } else {
+            alert.close();
         }
+
 
 
     }
