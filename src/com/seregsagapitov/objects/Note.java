@@ -28,17 +28,17 @@ public class Note {
 
         if (noteText.length() >= 20) {
             if (noteText.substring(0, 20).contains("\n")) {
-                this.title = new SimpleStringProperty((noteText.split("\n")[0]) + "..." + "\n" + String.format("%52s", currentMoment));
+                this.title = new SimpleStringProperty((noteText.split("\n")[0]) + "..." + "\n" + String.format("%60s", currentMoment));
             } else {
-                this.title = new SimpleStringProperty(noteText.substring(0, 20) + "..." + "\n" + String.format("%52s", currentMoment));
+                this.title = new SimpleStringProperty(noteText.substring(0, 20) + "..." + "\n" + String.format("%60s", currentMoment));
             }
         }
         if (noteText.split(" \n")[0].length() < 20) {
             if (noteText.contains("\n")) {
 
-                this.title = new SimpleStringProperty(noteText.split("\n")[0] + "..." + "\n" + String.format("%52s", currentMoment));
+                this.title = new SimpleStringProperty(noteText.split("\n")[0] + "..." + "\n" + String.format("%60s", currentMoment));
             } else {
-                this.title = new SimpleStringProperty(noteText + "..." + "\n" + String.format("%52s", currentMoment));
+                this.title = new SimpleStringProperty(noteText + "..." + "\n" + String.format("%60s", currentMoment));
             }
 
         }

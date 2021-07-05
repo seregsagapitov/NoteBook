@@ -8,6 +8,8 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -83,6 +85,8 @@ public class Controller {
     @FXML
     private MenuItem exportZipItem;
 
+    @FXML
+    private TextField filterField;
 
     @FXML
     private PasswordField setPass;
@@ -167,6 +171,42 @@ public class Controller {
 //            e.printStackTrace();
 //        }
         ConnectDB.feelDataDB();
+
+
+
+        // Реализация строки поиска filterField
+       // FilteredList<Note> filteredList = new FilteredList<>(collectionNote.getNoteList(), b - > true);
+        FilteredList<Note> filteredData = new FilteredList<>(collectionNote.getNoteList(), p -> true);
+        // 2. Set the filter Predicate whenever the filter changes.
+        filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(Note -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare first name and last name field in your object with filter.
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (String.valueOf(Note.getNoteText()).toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                    // Filter matches Notetext.
+                } else if (String.valueOf(Note.getCurrentMoment()).toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches CurrentMoment.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Note> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(tableNote.comparatorProperty());
+        // 5. Add sorted (and filtered) data to the table.
+        tableNote.setItems(sortedData);
+
+
+
+
 
         Platform.runLater(new Runnable() {
             @Override
@@ -622,7 +662,7 @@ public class Controller {
         int sizeRecycled = collectionNote.getNoteList().size();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Корзина");
-        alert.setHeaderText("Все файлы корзины будут удалены безвовратно");
+        alert.setHeaderText("Все файлы корзины будут удалены безвозвратно");
         alert.setContentText("Вы хотите очистить корзину?");
 
         Optional<ButtonType> result = alert.showAndWait();

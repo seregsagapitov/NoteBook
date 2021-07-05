@@ -23,7 +23,7 @@ public class Main extends Application {
             //primaryStage.initStyle(StageStyle.TRANSPARENT);
             primaryStage.setTitle("NoteBook");
             primaryStage.setResizable(false);
-            Scene scene = new Scene(root, 300, 530);
+            Scene scene = new Scene(root, 300, 640);
             //scene.setFill(Color.TRANSPARENT);
             primaryStage.setScene(scene);
             primaryStage.show();
