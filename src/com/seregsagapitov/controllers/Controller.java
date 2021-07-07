@@ -2,8 +2,10 @@ package com.seregsagapitov.controllers;
 
 import com.seregsagapitov.DB.ConnectDB;
 import com.seregsagapitov.interfaces.impls.CollectionNote;
+import com.seregsagapitov.objects.Language;
 import com.seregsagapitov.objects.Note;
 import com.seregsagapitov.start.Main;
+import com.seregsagapitov.utils.LocaleManager;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -28,17 +30,15 @@ import javafx.stage.Window;
 
 import java.awt.event.MouseEvent;
 import java.io.*;
-import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 import java.util.zip.*;
 
-public class Controller {
+public class Controller{
 
     CollectionNote collectionNote = new CollectionNote();
     private ListView<String> listViewSelectFolder;
@@ -60,12 +60,17 @@ public class Controller {
     @FXML
     private Button newFolderButton;
 
+
+    @FXML
+    private ComboBox<Language> comboLocales;
+
     @FXML
     Button clearRecButton;
 
     public TableView<Note> getTableNote() {
         return tableNote;
     }
+
     TextArea textAreaFX;
     @FXML
     private TableView<Note> tableNote;
@@ -114,11 +119,14 @@ public class Controller {
     public LoginController loginController;
     selectFolderReplaceController selectFolderReplaceController;
     public static boolean replaceOn;
+    ResourceBundle resourceBundle;
 
 
     public static TreeMap<String, String> dataTable = new TreeMap<>();
     public static Integer count = 0;
     public static String currentTable = "";
+    private static final String RU_CODE = "ru";
+    private static final String EN_CODE = "en";
 
 
     static {
@@ -131,6 +139,7 @@ public class Controller {
     @FXML
     private void initialize() throws SQLException, IOException {
         System.out.println(ConnectDB.selectPassword());
+
 
         if (currentTable == "NOTES" || currentTable == "RECYCLED") {
             menuButton_folder.getItems().get(1).setDisable(true);
@@ -173,9 +182,8 @@ public class Controller {
         ConnectDB.feelDataDB();
 
 
-
         // Реализация строки поиска filterField
-       // FilteredList<Note> filteredList = new FilteredList<>(collectionNote.getNoteList(), b - > true);
+        // FilteredList<Note> filteredList = new FilteredList<>(collectionNote.getNoteList(), b - > true);
         FilteredList<Note> filteredData = new FilteredList<>(collectionNote.getNoteList(), p -> true);
         // 2. Set the filter Predicate whenever the filter changes.
         filterField.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -195,17 +203,12 @@ public class Controller {
                 return false; // Does not match.
             });
         });
-
         // 3. Wrap the FilteredList in a SortedList.
         SortedList<Note> sortedData = new SortedList<>(filteredData);
-
         // 4. Bind the SortedList comparator to the TableView comparator.
         sortedData.comparatorProperty().bind(tableNote.comparatorProperty());
         // 5. Add sorted (and filtered) data to the table.
         tableNote.setItems(sortedData);
-
-
-
 
 
         Platform.runLater(new Runnable() {
@@ -219,6 +222,7 @@ public class Controller {
                             if (item.getText().equals("Выбор папки")) {
                                 selectFolderMenu(event);
                             }
+
                             if (item.getText().equals("Корзина")) {
                                 currentTable = "RECYCLED";
                                 try {
@@ -239,25 +243,6 @@ public class Controller {
                             if (item.getText().equals("Отправить в Zip архив...")) {
                                 exportToZipFile(event);
                             }
-                            if (item.getText().equals("Выбор цвета")) {
-                                try {
-                                    openWindowCoiceColour(event);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
-                            if (item.getText().equals("Настройки")) {
-                                try {
-                                    openWindowCoSetting(event);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                            if (item.getText().equals("Выход")) {
-                                System.exit(0);
-                                System.out.println("Кнопка выход и надо выйти!!!");
-                            }
 
                             if (item.getText().equals("пароль")) {
                                 if (setPasswordStage == null) {
@@ -271,7 +256,15 @@ public class Controller {
                                 } else {
                                     setPasswordStage.show();
                                 }
-                            } else {
+                            }
+
+
+                            if (item.getText().equals("Выход")) {
+                                System.exit(0);
+                                System.out.println("Кнопка выход и надо выйти!!!");
+                            }
+
+                             else {
                                 System.out.println("Не существует такой таблицы!!!");
                             }
                         }
@@ -335,6 +328,14 @@ public class Controller {
                 }
             }
         });
+
+        comboLocales.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Language selectedLang = (Language) comboLocales.getSelectionModel().getSelectedItem();
+                LocaleManager.setCurrentLanguage(selectedLang);
+            }
+        });
     }
 
 
@@ -377,40 +378,41 @@ public class Controller {
     }
 
     @FXML
-    void openEditWindow(){
+    void openEditWindow() {
         tableNote.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 Parent root = null;
 
-               if (tableNote.getSelectionModel().getSelectedItem() != null) {
-                   try {
-                       FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/editNote.fxml"));
-                       root = loader.load();
-                       Scene scene = new Scene(root);
-                       ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
-                       editController = loader.getController();
+                if (tableNote.getSelectionModel().getSelectedItem() != null) {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/editNote.fxml"));
+                        root = loader.load();
+                        Scene scene = new Scene(root);
+                        ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
+                        editController = loader.getController();
 
 
-                   } catch (IOException e) {
-                       e.printStackTrace();
-                   }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-                   Note selectedItem = (Note) tableNote.getSelectionModel().getSelectedItem();
-                   editController.setNote(selectedItem);
-                   System.out.println(tableNote.getSelectionModel().getSelectedItem());
-               }
-               else {
-                   Parent root1 = null;
-                   try {
-                       FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/newNote.fxml"));
-                       root1 = loader.load();
-                       newNoteController = loader.getController();
-                       Scene scene = new Scene(root1);
-                       ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
-                   } catch (IOException e) {
-                       e.printStackTrace();
-                   }
-               }
+                    Note selectedItem = (Note) tableNote.getSelectionModel().getSelectedItem();
+                    editController.setNote(selectedItem);
+                    System.out.println(tableNote.getSelectionModel().getSelectedItem());
+                } else {
+                    Parent root1 = null;
+                    try {
+                        if (!currentTable.equals("RECYCLED")) {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/newNote.fxml"));
+                            root1 = loader.load();
+                            newNoteController = loader.getController();
+                            Scene scene = new Scene(root1);
+                            ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
 
 
             }
@@ -442,8 +444,6 @@ public class Controller {
 //        ArrayList<Note> rows = new ArrayList<>(selectedNotes);
         replaceOn = true;
         selectFolderMenu(event);
-
-
 ///////////////////////////////////////////////////////////////////////////////
 
     }
@@ -484,7 +484,7 @@ public class Controller {
             String value = String.valueOf(entry.getValue());
             selectFolderController.getListViewSelectFolder().getItems().add(value);
         }
-
+        fillLangCombobox();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -508,9 +508,9 @@ public class Controller {
 
 
     // Сохранение данных приложения в Zip-файл
-    @FXML
-    void exportToZipFile(ActionEvent event) {
 
+    @FXML
+    private void exportToZipFile(ActionEvent event) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
 
         directoryChooser.setTitle("Выбор папки для Zip-архива");
@@ -600,6 +600,8 @@ public class Controller {
             e.printStackTrace();
         }
         createAlertMessage("Создание Zip-архива", "Zip-архив " + Paths.get(zipFile).getFileName() + " успешно создан!", "Размер архива: " + new File(zipFile).length() + " байт");
+
+
     }
 
     private void Zip(String source_dir, String zip_file) throws Exception {
@@ -613,7 +615,6 @@ public class Controller {
         File fileSource = new File(source_dir);
         addDirectory(zout, fileSource);
         // Закрываем ZipOutputStream
-        zout.closeEntry();
         zout.close();
         System.out.println("Zip файл создан!");
     }
@@ -655,7 +656,6 @@ public class Controller {
     }
 
 
-
     // Метод очистки корзины (безвозвратное удаление данных)
     @FXML
     void clearRecycled(ActionEvent event) {
@@ -666,7 +666,7 @@ public class Controller {
         alert.setContentText("Вы хотите очистить корзину?");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             ConnectDB.deleteFromRecycled();
             try {
                 ConnectDB.showData(collectionNote.getNoteList());
@@ -677,7 +677,6 @@ public class Controller {
         } else {
             alert.close();
         }
-
 
 
     }
@@ -738,5 +737,21 @@ public class Controller {
         Stage stage = (Stage) sourse.getScene().getWindow();
         stage.close();
     }
+
+    private void fillLangCombobox() {
+        Language langRU = new Language(RU_CODE, resourceBundle.getString("ru"), LocaleManager.RU_LOCALE, 0);
+        Language langEN = new Language(EN_CODE, resourceBundle.getString("en"), LocaleManager.EN_LOCALE, 1);
+
+        comboLocales.getItems().add(langRU);
+        comboLocales.getItems().add(langEN);
+
+        if (LocaleManager.getCurrentLanguage() == null){ // по умолчанию показывать русский язык
+            comboLocales.getSelectionModel().select(0);
+        }
+        else {
+            comboLocales.getSelectionModel().select(LocaleManager.getCurrentLanguage().getIndex());
+        }
+    }
+
 }
 

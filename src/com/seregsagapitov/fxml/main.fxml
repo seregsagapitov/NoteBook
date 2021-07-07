@@ -135,6 +135,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
+                  <ComboBox fx:id="comboLocales" layoutX="146.0" layoutY="36.0" prefHeight="30.0" prefWidth="130.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="34.0" />
                </children>
             </AnchorPane>
          </children>

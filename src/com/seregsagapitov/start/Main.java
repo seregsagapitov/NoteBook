@@ -11,15 +11,21 @@ import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import sun.security.util.Password;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public class Main extends Application {
-///24/06/2021 1:58
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
 
         if (ConnectDB.selectPassword().equals("")) {
-            Parent root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/main.fxml"));
+            //loader.setResources(ResourceBundle.getBundle("../bundless/Locale_en.properties", new Locale("en")));
+            Parent root = loader.load();
+            //Parent root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
             //primaryStage.initStyle(StageStyle.TRANSPARENT);
             primaryStage.setTitle("NoteBook");
             primaryStage.setResizable(false);
