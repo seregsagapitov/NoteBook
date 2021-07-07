@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,6 +31,7 @@ import javafx.stage.Window;
 
 import java.awt.event.MouseEvent;
 import java.io.*;
+import java.net.URL;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.ResultSet;
@@ -38,7 +40,7 @@ import java.sql.Statement;
 import java.util.*;
 import java.util.zip.*;
 
-public class Controller{
+public class Controller extends Observable implements Initializable {
 
     CollectionNote collectionNote = new CollectionNote();
     private ListView<String> listViewSelectFolder;
@@ -161,6 +163,7 @@ public class Controller{
         });
 
         collectionNote.fillTestData();
+
         tableNote.setItems(collectionNote.getNoteList());
         updateCountLabel();
 
@@ -334,8 +337,14 @@ public class Controller{
             public void handle(ActionEvent event) {
                 Language selectedLang = (Language) comboLocales.getSelectionModel().getSelectedItem();
                 LocaleManager.setCurrentLanguage(selectedLang);
+
+                // уведомить всех слушателей, что произошла смена языка
+             setChanged();
+             notifyObservers(selectedLang);
             }
         });
+
+        //fillLangCombobox();
     }
 
 
@@ -484,7 +493,7 @@ public class Controller{
             String value = String.valueOf(entry.getValue());
             selectFolderController.getListViewSelectFolder().getItems().add(value);
         }
-        fillLangCombobox();
+       // fillLangCombobox();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -753,5 +762,17 @@ public class Controller{
         }
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+            this.resourceBundle = resources;
+            initialize();
+           // fillLangCombobox();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
