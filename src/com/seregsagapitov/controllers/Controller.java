@@ -164,6 +164,8 @@ public class Controller extends Observable implements Initializable {
 
         collectionNote.fillTestData();
 
+        fillLangCombobox();
+
         tableNote.setItems(collectionNote.getNoteList());
         updateCountLabel();
 
@@ -222,11 +224,11 @@ public class Controller extends Observable implements Initializable {
                     item.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-                            if (item.getText().equals("Выбор папки")) {
+                            if (item.getText().equals(resourceBundle.getString("SelectFolder"))) {
                                 selectFolderMenu(event);
                             }
 
-                            if (item.getText().equals("Корзина")) {
+                            if (item.getText().equals(resourceBundle.getString("Recycled"))) {
                                 currentTable = "RECYCLED";
                                 try {
                                     ConnectDB.showData(CollectionNote.noteList);
@@ -243,14 +245,14 @@ public class Controller extends Observable implements Initializable {
 
                             }
 
-                            if (item.getText().equals("Отправить в Zip архив...")) {
+                            if (item.getText().equals(resourceBundle.getString("ExportZipFile"))) {
                                 exportToZipFile(event);
                             }
 
-                            if (item.getText().equals("пароль")) {
+                            if (item.getText().equals("Password")) {
                                 if (setPasswordStage == null) {
                                     setPasswordStage = new Stage();
-                                    setPasswordStage.setTitle("Установка пароля ");
+                                    setPasswordStage.setTitle(resourceBundle.getString("SetPassword"));
                                     setPasswordStage.setResizable(false);
                                     setPasswordStage.setScene(new Scene(fxmlSetPass, 300, 150));
                                     setPasswordStage.initModality(Modality.WINDOW_MODAL);
@@ -262,12 +264,10 @@ public class Controller extends Observable implements Initializable {
                             }
 
 
-                            if (item.getText().equals("Выход")) {
+                            if (item.getText().equals(resourceBundle.getString("Exit"))) {
                                 System.exit(0);
                                 System.out.println("Кнопка выход и надо выйти!!!");
-                            }
-
-                             else {
+                            } else {
                                 System.out.println("Не существует такой таблицы!!!");
                             }
                         }
@@ -285,7 +285,7 @@ public class Controller extends Observable implements Initializable {
                     item.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-                            if (item.getText().equals("Новая папка")) {
+                            if (item.getText().equals(resourceBundle.getString("NewFolder"))) {
                                 try {
                                     Stage stage = new Stage();
                                     FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/newFolderNote.fxml"));
@@ -293,7 +293,7 @@ public class Controller extends Observable implements Initializable {
                                     newFolderController = loader.getController();
                                     newFolderController.columnNotesNewFolder = columnNotes;
                                     //newFolderController.menuButton = menuButton;
-                                    stage.setTitle("Новая папка");
+                                    stage.setTitle(resourceBundle.getString("NewFolder"));
                                     stage.setScene(new Scene(root, 300, 150));
                                     stage.initModality(Modality.APPLICATION_MODAL);
                                     stage.showAndWait();
@@ -302,7 +302,7 @@ public class Controller extends Observable implements Initializable {
                                 }
                             }
 
-                            if (item.getText().equals("Удалить папку")) {
+                            if (item.getText().equals(resourceBundle.getString("DelFolder"))) {
                                 String ss = Controller.dataTable.get(Controller.currentTable);  // Видимый заголовок таблицы
                                 String s1 = currentTable;
                                 try {
@@ -332,21 +332,28 @@ public class Controller extends Observable implements Initializable {
             }
         });
 
-        comboLocales.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                Language selectedLang = (Language) comboLocales.getSelectionModel().getSelectedItem();
-                LocaleManager.setCurrentLanguage(selectedLang);
 
-                // уведомить всех слушателей, что произошла смена языка
-             setChanged();
-             notifyObservers(selectedLang);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                // слушаем изменение языка
+                comboLocales.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        Language selectedLang = (Language) comboLocales.getSelectionModel().getSelectedItem();
+                        LocaleManager.setCurrentLanguage(selectedLang);
+
+                        // уведомить всех слушателей, что произошла смена языка
+                        setChanged();
+                        notifyObservers(selectedLang);
+                        System.out.println("Изменение языка");
+                        //fillLangCombobox();
+                    }
+                });
+
             }
         });
-
-        //fillLangCombobox();
     }
-
 
     // Открытие окна установки пароля на приложение
     @FXML
@@ -355,7 +362,7 @@ public class Controller extends Observable implements Initializable {
 
         if (setPasswordStage == null) {
             setPasswordStage = new Stage();
-            setPasswordStage.setTitle("Установка пароля ");
+            setPasswordStage.setTitle(resourceBundle.getString("SetPassword"));
             setPasswordStage.setResizable(false);
             setPasswordStage.setScene(new Scene(fxmlSetPass, 300, 150));
             setPasswordStage.initModality(Modality.WINDOW_MODAL);
@@ -442,7 +449,7 @@ public class Controller extends Observable implements Initializable {
 
 
     public void updateCountLabel() {
-        labelCount.setText("Количество записей: " + collectionNote.getNoteList().size());
+        labelCount.setText(resourceBundle.getString("Count") +  ": " + collectionNote.getNoteList().size());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -476,7 +483,7 @@ public class Controller extends Observable implements Initializable {
                 selectFolderController.getListViewSelectFolder().getItems().add(value);
                 //selectFolderController.getListViewSelectFolder().getItems().add();
             }
-            stage.setTitle("Выбор папки");
+            stage.setTitle(resourceBundle.getString("SelectFolder"));
             stage.setScene(new Scene(root, 300, 300));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
@@ -493,7 +500,7 @@ public class Controller extends Observable implements Initializable {
             String value = String.valueOf(entry.getValue());
             selectFolderController.getListViewSelectFolder().getItems().add(value);
         }
-       // fillLangCombobox();
+        // fillLangCombobox();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -754,10 +761,9 @@ public class Controller extends Observable implements Initializable {
         comboLocales.getItems().add(langRU);
         comboLocales.getItems().add(langEN);
 
-        if (LocaleManager.getCurrentLanguage() == null){ // по умолчанию показывать русский язык
+        if (LocaleManager.getCurrentLanguage() == null) { // по умолчанию показывать русский язык
             comboLocales.getSelectionModel().select(0);
-        }
-        else {
+        } else {
             comboLocales.getSelectionModel().select(LocaleManager.getCurrentLanguage().getIndex());
         }
     }
@@ -767,7 +773,7 @@ public class Controller extends Observable implements Initializable {
         try {
             this.resourceBundle = resources;
             initialize();
-           // fillLangCombobox();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (IOException e) {

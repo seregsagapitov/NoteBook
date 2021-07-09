@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -8,10 +9,10 @@
    <children>
       <HBox layoutX="113.0" layoutY="87.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0">
          <children>
-            <ListView fx:id="listViewSelectFolder"  onMouseClicked="#clickMouseSelect" prefHeight="392.0" prefWidth="276.0" style="-fx-font-size: 14;" />
+            <ListView fx:id="listViewSelectFolder" onMouseClicked="#clickMouseSelect" prefHeight="392.0" prefWidth="276.0" style="-fx-font-size: 14;" />
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="buttonSelectFolder" alignment="CENTER" layoutX="17.0" layoutY="43.0" mnemonicParsing="false" onAction="#buttonSelect" text="Перейти">
+                  <Button fx:id="buttonSelectFolder" alignment="CENTER" layoutX="17.0" layoutY="43.0" mnemonicParsing="false" onAction="#buttonSelect" text="%GotoFolder">
                      <font>
                         <Font size="14.0" />
                      </font></Button>

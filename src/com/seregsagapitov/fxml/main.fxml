@@ -16,17 +16,17 @@
          <children>
             <HBox prefHeight="54.0" prefWidth="310.0">
                <children>
-                  <MenuButton fx:id="menuButton" mnemonicParsing="false" onAction="#OnActionMenuButton" prefHeight="25.0" prefWidth="100.0" text="NoteText" HBox.hgrow="ALWAYS">
+                  <MenuButton fx:id="menuButton" mnemonicParsing="false" onAction="#OnActionMenuButton" prefHeight="25.0" prefWidth="100.0" text="%NoteBook" HBox.hgrow="ALWAYS">
                     <items>
-                      <MenuItem fx:id="listFolders" mnemonicParsing="false" onAction="#choiseFolder" text="О программе" />
-                        <MenuItem fx:id="listFolders1" mnemonicParsing="false" onAction="#choiseFolder" text="Выбор папки" />
-                        <MenuItem mnemonicParsing="false" text="Корзина" />
+                      <MenuItem fx:id="listFolders" mnemonicParsing="false" onAction="#choiseFolder" text="%AboutProgramm" />
+                        <MenuItem fx:id="listFolders1" mnemonicParsing="false" onAction="#choiseFolder" text="%SelectFolder" />
+                        <MenuItem mnemonicParsing="false" text="%Recycled" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="exportZipItem" mnemonicParsing="false" onAction="#exportToZipFile" text="Отправить в Zip архив..." />
+                        <MenuItem fx:id="exportZipItem" mnemonicParsing="false" onAction="#exportToZipFile" text="%ExportZipFile" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="itemSetPassword" mnemonicParsing="false" onAction="#openSetPassWindow" text="пароль" />
+                        <MenuItem fx:id="itemSetPassword" mnemonicParsing="false" onAction="#openSetPassWindow" text="Password" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="setting1" mnemonicParsing="false" onAction="#openSettingWindow" text="Выход" />
+                        <MenuItem fx:id="setting1" mnemonicParsing="false" onAction="#openSettingWindow" text="%Exit" />
                     </items>
                      <opaqueInsets>
                         <Insets top="5.0" />
@@ -41,8 +41,8 @@
                   <MenuBar />
                   <MenuButton fx:id="menuButton_folder" mnemonicParsing="false" onAction="#OnActionMenuButton_folder" prefHeight="30.0" prefWidth="82.0" text="ппп" HBox.hgrow="ALWAYS">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="Новая папка" />
-                      <MenuItem mnemonicParsing="false" text="Удалить папку" />
+                      <MenuItem mnemonicParsing="false" text="%NewFolder" />
+                      <MenuItem mnemonicParsing="false" text="%DelFolder" />
                     </items>
                      <HBox.margin>
                         <Insets bottom="3.0" left="3.0" top="3.0" />
@@ -51,7 +51,7 @@
                         <Font size="14.0" />
                      </font>
                   </MenuButton>
-                  <Button fx:id="replaceButton" mnemonicParsing="false" onAction="#replaceNote" prefHeight="30.0" prefWidth="119.0" text="Переместить" HBox.hgrow="ALWAYS">
+                  <Button fx:id="replaceButton" mnemonicParsing="false" onAction="#replaceNote" prefHeight="30.0" prefWidth="119.0" text="%Replace" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets left="3.0" right="3.0" top="3.0" />
                      </HBox.margin>
@@ -61,7 +61,7 @@
                   </Button>
                </children>
             </HBox>
-            <TextField fx:id="filterField" promptText="поиск">
+            <TextField fx:id="filterField" promptText="%search">
                <VBox.margin>
                   <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                </VBox.margin>
@@ -104,7 +104,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="delButton" mnemonicParsing="false" onAction="#delNote" prefHeight="25.0" prefWidth="118.0" text="Удалить" HBox.hgrow="ALWAYS">
+                              <Button fx:id="delButton" mnemonicParsing="false" onAction="#delNote" prefHeight="25.0" prefWidth="118.0" text="%DelNote" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="3.0" />
                                  </HBox.margin>
@@ -112,7 +112,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="clearRecButton" mnemonicParsing="false" onAction="#clearRecycled" prefHeight="30.0" prefWidth="130.0" text="Очистить корзину">
+                              <Button fx:id="clearRecButton" mnemonicParsing="false" onAction="#clearRecycled" prefHeight="30.0" prefWidth="130.0" text="%ClearRecycled">
                                  <padding>
                                     <Insets top="3.0" />
                                  </padding>
@@ -130,7 +130,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <Label fx:id="labelCount" layoutX="14.0" layoutY="41.0" prefHeight="13.0" prefWidth="172.0" text="Число записей" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="38.0">
+                  <Label fx:id="labelCount" layoutX="14.0" layoutY="41.0" prefHeight="13.0" prefWidth="172.0" text="%Count" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="38.0">
                      <font>
                         <Font size="15.0" />
                      </font>
