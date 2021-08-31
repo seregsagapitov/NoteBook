@@ -25,19 +25,43 @@ import java.util.ResourceBundle;
 public class Main extends Application implements Observer {
 
 
-    private static final String FXML_MAIN = "../fxml/main.fxml";
-    private static final String BUNDLES_FOLDER = "com.seregsagapitov.bundles.Locale";
-    private Stage primaryStage;
+    public static final String FXML_MAIN = "../fxml/main.fxml";
+    public static final String BUNDLES_FOLDER = "com.seregsagapitov.bundles.Locale";
+    private static Stage primaryStage;
+
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
     private Parent fxmlMain;
     private Controller controller;
     private FXMLLoader fxmlLoader;
 
     private AnchorPane currentRoot;
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         this.primaryStage = primaryStage;
-        createGUI(LocaleManager.RU_LOCALE);
+
+        if (ConnectDB.selectPassword().equals("")) {
+
+        createGUI(LocaleManager.RU_LOCALE);}
+        else {
+            //ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.currentLanguage.getLocale());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Password.fxml"));
+            Parent root = loader.load();
+
+            primaryStage.setTitle("NoteMain");
+            primaryStage.setResizable(false);
+            Scene scene = new Scene(root, 300, 100);
+
+
+            primaryStage.setScene(scene);
+           primaryStage.show();
+        }
+
     }
 
     public static void main(String[] args) {
@@ -49,6 +73,7 @@ public class Main extends Application implements Observer {
         Language language = (Language) arg;
         AnchorPane newNode = loadFXML(language.getLocale()); // получить новое дерево компонентов  с нужной локалью
         currentRoot.getChildren().setAll(newNode.getChildren()); // заменить старые дочерние компоненты на новые
+
 
     }
 
@@ -72,9 +97,9 @@ public class Main extends Application implements Observer {
         return node;
     }
 
-    private void createGUI(Locale locale) {
+    public  void createGUI(Locale locale) {
         currentRoot = loadFXML(locale);
-        Scene scene = new Scene(currentRoot, 300, 640);
+        Scene scene = new Scene(currentRoot, 310, 640);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();

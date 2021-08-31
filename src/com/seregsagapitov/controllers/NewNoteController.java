@@ -1,7 +1,10 @@
 package com.seregsagapitov.controllers;
 
 import com.seregsagapitov.interfaces.impls.CollectionNote;
+import com.seregsagapitov.objects.Language;
 import com.seregsagapitov.objects.Note;
+import com.seregsagapitov.start.Main;
+import com.seregsagapitov.utils.LocaleManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,11 +17,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 public class NewNoteController {
 
+
+    ResourceBundle resourceBundle;
     @FXML
     private AnchorPane MainAnchorPain;
+
+    Controller controller;
 
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMM yyyy г HH:mm:ss");
     CollectionNote collectionNote = new CollectionNote();
@@ -29,13 +37,24 @@ public class NewNoteController {
 
     void actionClose(ActionEvent event) {
         Parent root = null;
+
         try {
-            root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
-            Scene scene = new Scene(root);
-            ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
-        } catch (IOException e) {
+
+            Main main = new Main();
+            resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+           // Main.getPrimaryStage().close();
+            main.createGUI(LocaleManager.currentLanguage.getLocale());
+
+//            ResourceBundle resources = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+//            root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"), resources);
+//            Scene scene = new Scene(root);
+//            ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+
     }
 
     @FXML

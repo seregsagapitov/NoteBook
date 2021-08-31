@@ -3,6 +3,8 @@ package com.seregsagapitov.controllers;
 import com.seregsagapitov.DB.ConnectDB;
 import com.seregsagapitov.interfaces.impls.CollectionNote;
 import com.seregsagapitov.objects.Note;
+import com.seregsagapitov.start.Main;
+import com.seregsagapitov.utils.LocaleManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -10,8 +12,11 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.sql.*;
+import java.util.ResourceBundle;
 
 public class NewFolderController {
+
+    ResourceBundle resourceBundle;
     private static Connection connection;
     private static Statement stmt;
     public TableColumn<Note, String> columnNotesNewFolder;
@@ -20,6 +25,12 @@ public class NewFolderController {
     private TextField labelNewFolder;
 
     void actionClose(ActionEvent event) {
+
+//        Main main = new Main();
+//        resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+//        // Main.getPrimaryStage().close();
+//        main.createGUI(LocaleManager.currentLanguage.getLocale());
+
         Node sourse = (Node) event.getSource();
         Stage stage = (Stage) sourse.getScene().getWindow();
         stage.close();

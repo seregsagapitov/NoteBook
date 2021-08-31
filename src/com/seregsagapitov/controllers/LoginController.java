@@ -1,6 +1,8 @@
 package com.seregsagapitov.controllers;
 
 import com.seregsagapitov.DB.ConnectDB;
+import com.seregsagapitov.start.Main;
+import com.seregsagapitov.utils.LocaleManager;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +26,7 @@ import java.util.ResourceBundle;
 
 public class LoginController {
 
+    ResourceBundle resourceBundle;
     private Stage stage;
     @FXML
     public Label labelPass;
@@ -44,20 +47,19 @@ public class LoginController {
     void EnterMain(ActionEvent event) throws SQLException, InterruptedException {
         if (passField.getText().equals(ConnectDB.selectPassword())) {
             Parent root = null;
-            try {
+            Main main = new Main();
+            resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+            // Main.getPrimaryStage().close();
+            main.createGUI(LocaleManager.RU_LOCALE);
+//                ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/main.fxml"), resourceBundle);
+//                root = loader.load();
+//
+//
+//                Scene scene = new Scene(root);
+//                ((Stage) PassPain.getScene().getWindow()).setScene(scene);
 
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/main.fxml"));
-                root = loader.load();
-
-
-                Scene scene = new Scene(root);
-                ((Stage) PassPain.getScene().getWindow()).setScene(scene);
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         } else {
             labelPass.setVisible(true);
             passField.clear();

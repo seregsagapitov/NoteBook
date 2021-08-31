@@ -135,12 +135,15 @@ public class Controller extends Observable implements Initializable {
         dataTable.put("NOTES", "Мои заметки");
         dataTable.put("RECYCLED", "Корзина");
         currentTable = "NOTES";
-        //dataTable.put(currentTable, "пум-пурум");
+
     }
 
     @FXML
-    private void initialize() throws SQLException, IOException {
+    public void initialize() throws SQLException, IOException {
         System.out.println(ConnectDB.selectPassword());
+        fillLangCombobox();
+        LocaleManager.setCurrentLanguage(comboLocales.getSelectionModel().getSelectedItem());
+        listenCombo();
 
 
         if (currentTable == "NOTES" || currentTable == "RECYCLED") {
@@ -164,13 +167,13 @@ public class Controller extends Observable implements Initializable {
 
         collectionNote.fillTestData();
 
-        fillLangCombobox();
 
         tableNote.setItems(collectionNote.getNoteList());
         updateCountLabel();
 
         fxmlLoader4.setLocation(getClass().getResource("../fxml/choiceColour.fxml"));
         fxmlLoader5.setLocation(getClass().getResource("../fxml/setts.fxml"));
+
         fxmlLoader6.setLocation(getClass().getResource("../fxml/setPassword.fxml"));
 
 
@@ -288,7 +291,8 @@ public class Controller extends Observable implements Initializable {
                             if (item.getText().equals(resourceBundle.getString("NewFolder"))) {
                                 try {
                                     Stage stage = new Stage();
-                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/newFolderNote.fxml"));
+                                    ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.currentLanguage.getLocale());
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/newFolderNote.fxml"), resourceBundle);
                                     Parent root = loader.load();
                                     newFolderController = loader.getController();
                                     newFolderController.columnNotesNewFolder = columnNotes;
@@ -333,6 +337,29 @@ public class Controller extends Observable implements Initializable {
         });
 
 
+//        Platform.runLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                // слушаем изменение языка
+//                comboLocales.setOnAction(new EventHandler<ActionEvent>() {
+//                    @Override
+//                    public void handle(ActionEvent event) {
+//                        Language selectedLang = (Language) comboLocales.getSelectionModel().getSelectedItem();
+//                        LocaleManager.setCurrentLanguage(selectedLang);
+//
+//                        // уведомить всех слушателей, что произошла смена языка
+//                        setChanged();
+//                        notifyObservers(selectedLang);
+//                        System.out.println("Изменение языка");
+//                        //fillLangCombobox();
+//                    }
+//                });
+//
+//            }
+//        });
+    }
+
+    public void listenCombo() {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -347,7 +374,6 @@ public class Controller extends Observable implements Initializable {
                         setChanged();
                         notifyObservers(selectedLang);
                         System.out.println("Изменение языка");
-                        //fillLangCombobox();
                     }
                 });
 
@@ -380,17 +406,16 @@ public class Controller extends Observable implements Initializable {
     @FXML
     void addNote(ActionEvent event) {
         Parent root = null;
+        ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.currentLanguage.getLocale());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/newNote.fxml"), resourceBundle);
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/newNote.fxml"));
             root = loader.load();
-            newNoteController = loader.getController();
-            //newNoteController.textAreaFX = textAreaFX;
-            Scene scene = new Scene(root);
-            ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
-            //textAreaFX.requestFocus();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Scene scene = new Scene(root);
+        ((Stage) addButton.getScene().getWindow()).setScene(scene);
+
     }
 
     @FXML
@@ -401,10 +426,12 @@ public class Controller extends Observable implements Initializable {
 
                 if (tableNote.getSelectionModel().getSelectedItem() != null) {
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/editNote.fxml"));
+
+                        ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.currentLanguage.getLocale());
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/editNote.fxml"), resourceBundle);
                         root = loader.load();
                         Scene scene = new Scene(root);
-                        ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
+                        ((Stage) addButton.getScene().getWindow()).setScene(scene);
                         editController = loader.getController();
 
 
@@ -419,7 +446,8 @@ public class Controller extends Observable implements Initializable {
                     Parent root1 = null;
                     try {
                         if (!currentTable.equals("RECYCLED")) {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/newNote.fxml"));
+                            ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.currentLanguage.getLocale());
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/newNote.fxml"), resourceBundle);
                             root1 = loader.load();
                             newNoteController = loader.getController();
                             Scene scene = new Scene(root1);
@@ -449,7 +477,7 @@ public class Controller extends Observable implements Initializable {
 
 
     public void updateCountLabel() {
-        labelCount.setText(resourceBundle.getString("Count") +  ": " + collectionNote.getNoteList().size());
+        labelCount.setText(resourceBundle.getString("Count") + ": " + collectionNote.getNoteList().size());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
@@ -468,7 +496,8 @@ public class Controller extends Observable implements Initializable {
     public void selectFolderMenu(ActionEvent actionEvent) {
         try {
             Stage stage = new Stage();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/selectFolder.fxml"));
+            ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.currentLanguage.getLocale());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/selectFolder.fxml"), resourceBundle);
             Parent root = loader.load();
             selectFolderController = loader.getController();
             selectFolderController.columnNotesSelectFolder = columnNotes;
@@ -754,7 +783,7 @@ public class Controller extends Observable implements Initializable {
         stage.close();
     }
 
-    private void fillLangCombobox() {
+    public void fillLangCombobox() {
         Language langRU = new Language(RU_CODE, resourceBundle.getString("ru"), LocaleManager.RU_LOCALE, 0);
         Language langEN = new Language(EN_CODE, resourceBundle.getString("en"), LocaleManager.EN_LOCALE, 1);
 

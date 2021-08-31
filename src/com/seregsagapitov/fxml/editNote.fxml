@@ -12,12 +12,12 @@
       <children>
          <HBox>
             <children>
-               <Button fx:id="btnSave" layoutX="25.0" layoutY="14.0" mnemonicParsing="false" onAction="#actionSave" text="Сохранить">
+               <Button fx:id="btnSave" layoutX="25.0" layoutY="14.0" mnemonicParsing="false" onAction="#actionSave" text="%Save_Note">
                   <HBox.margin>
                      <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                   </HBox.margin>
                </Button>
-               <Button fx:id="btnClose" cancelButton="true" layoutX="100.0" layoutY="13.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="27.0" prefWidth="69.0" text="Отмена" AnchorPane.leftAnchor="100.0">
+               <Button fx:id="btnClose" cancelButton="true" layoutX="100.0" layoutY="13.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="27.0" prefWidth="69.0" text="%Cancel" AnchorPane.leftAnchor="100.0">
                   <HBox.margin>
                      <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                   </HBox.margin>

@@ -3,6 +3,7 @@ package com.seregsagapitov.controllers;
 import com.seregsagapitov.interfaces.impls.CollectionNote;
 import com.seregsagapitov.objects.Note;
 import com.seregsagapitov.start.Main;
+import com.seregsagapitov.utils.LocaleManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,9 +19,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 public class EditController {
 
+
+    ResourceBundle resourceBundle;
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMM. yyyy г HH:mm:ss");
     @FXML
     private Button btnClose;
@@ -67,13 +71,16 @@ public class EditController {
     void actionClose(ActionEvent event) throws IOException {
 
         Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
-            Scene scene = new Scene(root);
-            ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        Main main = new Main();
+        resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+        // Main.getPrimaryStage().close();
+        main.createGUI(LocaleManager.currentLanguage.getLocale());
+
+//            ResourceBundle resources = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+//            root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"), resources);
+//            Scene scene = new Scene(root);
+//            ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
     }
 
     @FXML

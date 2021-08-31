@@ -12,7 +12,7 @@
          <children>
             <HBox>
                <children>
-                  <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#actionAdd" prefHeight="30.0" prefWidth="132.0" text="Добавить запись">
+                  <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#actionAdd" prefHeight="30.0" prefWidth="132.0" text="%Add_Note">
                      <HBox.margin>
                         <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                      </HBox.margin>
@@ -20,7 +20,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnClose" cancelButton="true" mnemonicParsing="false" onAction="#cancelButton" prefHeight="25.0" prefWidth="70.0" text="Отмена">
+                  <Button fx:id="btnClose" cancelButton="true" mnemonicParsing="false" onAction="#cancelButton" prefHeight="25.0" prefWidth="70.0" text="%Cancel">
                      <HBox.margin>
                         <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                      </HBox.margin>
