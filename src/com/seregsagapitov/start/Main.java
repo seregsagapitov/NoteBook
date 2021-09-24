@@ -47,19 +47,18 @@ public class Main extends Application implements Observer {
 
         if (ConnectDB.selectPassword().equals("")) {
 
-        createGUI(LocaleManager.RU_LOCALE);}
-        else {
-            //ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.currentLanguage.getLocale());
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Password.fxml"));
+            createGUI(LocaleManager.RU_LOCALE);
+        } else {
+            ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.EN_LOCALE);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Password.fxml"), resourceBundle);
             Parent root = loader.load();
 
             primaryStage.setTitle("NoteMain");
             primaryStage.setResizable(false);
             Scene scene = new Scene(root, 300, 100);
-
-
             primaryStage.setScene(scene);
-           primaryStage.show();
+            //scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            primaryStage.show();
         }
 
     }
@@ -97,7 +96,7 @@ public class Main extends Application implements Observer {
         return node;
     }
 
-    public  void createGUI(Locale locale) {
+    public void createGUI(Locale locale) {
         currentRoot = loadFXML(locale);
         Scene scene = new Scene(currentRoot, 310, 640);
         primaryStage.setScene(scene);

@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,8 +27,6 @@ public class NewNoteController {
     @FXML
     private AnchorPane MainAnchorPain;
 
-    Controller controller;
-
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMM yyyy г HH:mm:ss");
     CollectionNote collectionNote = new CollectionNote();
 
@@ -36,15 +35,12 @@ public class NewNoteController {
 
 
     void actionClose(ActionEvent event) {
-        Parent root = null;
-
         try {
-
             Main main = new Main();
             resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
-           // Main.getPrimaryStage().close();
             main.createGUI(LocaleManager.currentLanguage.getLocale());
 
+//            Parent root = null;
 //            ResourceBundle resources = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
 //            root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"), resources);
 //            Scene scene = new Scene(root);
@@ -53,8 +49,6 @@ public class NewNoteController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
     @FXML

@@ -46,16 +46,15 @@ public class LoginController {
     @FXML
     void EnterMain(ActionEvent event) throws SQLException, InterruptedException {
         if (passField.getText().equals(ConnectDB.selectPassword())) {
-            Parent root = null;
+
             Main main = new Main();
             resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
-            // Main.getPrimaryStage().close();
             main.createGUI(LocaleManager.RU_LOCALE);
+
+//            Parent root = null;
 //                ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
 //                FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/main.fxml"), resourceBundle);
 //                root = loader.load();
-//
-//
 //                Scene scene = new Scene(root);
 //                ((Stage) PassPain.getScene().getWindow()).setScene(scene);
 
@@ -68,37 +67,8 @@ public class LoginController {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    // Thread.currentThread().join();
-                    //Thread.sleep(3000);
                 }
             });
-
-
         }
-
     }
-
-
-//    @Override
-//    public void initialize(URL location, ResourceBundle resources) {
-//        try {
-//            try {
-//                if ((ConnectDB.selectPassword()).equals("q")) {
-//                    Parent root = null;
-//                    try {
-//                        root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
-//                        Scene scene = new Scene(root);
-//                        //((Stage) PassPain.getScene().getWindow()).setScene(scene);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
 }

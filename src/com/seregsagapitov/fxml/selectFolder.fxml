@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seregsagapitov.controllers.selectFolderController">
+<AnchorPane prefHeight="400.0" prefWidth="320.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seregsagapitov.controllers.selectFolderController">
    <children>
       <HBox layoutX="113.0" layoutY="87.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="3.0">
          <children>
             <ListView fx:id="listViewSelectFolder" onMouseClicked="#clickMouseSelect" prefHeight="392.0" prefWidth="276.0" style="-fx-font-size: 14;" />
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="buttonSelectFolder" alignment="CENTER" layoutX="17.0" layoutY="43.0" mnemonicParsing="false" onAction="#buttonSelect" text="%GotoFolder">
+                  <Button fx:id="buttonSelectFolder" alignment="CENTER" layoutX="4.0" layoutY="43.0" mnemonicParsing="false" onAction="#buttonSelect" prefHeight="43.0" prefWidth="111.0" text="%GotoFolder">
                      <font>
                         <Font size="14.0" />
                      </font></Button>

@@ -37,34 +37,15 @@ public class EditController {
 
     @FXML
     private TextArea textAreaFXsave;
-
     private Note note;
 
 
     public void setNote(Note note) {
         this.note = note;
-
         if (note.getNoteText() == null) {
             textAreaFXsave.setText("");
         } else
-
             textAreaFXsave.setText(note.getNoteText());
-
-//        if (textAreaFXsave.getText().contains("\n") && textAreaFXsave.getText().split("\n")[0].length() >= 20) {
-//            note.setTitle((textAreaFXsave.getText().split("\\n")[0]).substring(0, 20) + "\n" + simpleDateFormat.format(new Date()));
-//            System.out.println("################### " + (textAreaFXsave.getText().split("\n")[0]).substring(0, 20));
-//        }
-//        if (textAreaFXsave.getText().contains("\n") && textAreaFXsave.getText().split("\n")[0].length() < 20) {
-//            note.setTitle(textAreaFXsave.getText().split("\\n")[0] + "\n" + simpleDateFormat.format(new Date()));
-//            System.out.println("################### " + (textAreaFXsave.getText().split("\n")[0]));
-//        }
-//
-//        if (textAreaFXsave.getText().length() >= 20) {
-//            note.setTitle(textAreaFXsave.getText().substring(0, 20).trim() + "\n" + simpleDateFormat.format(new Date()));
-//        } else {
-//            note.setTitle(textAreaFXsave.getText().trim() + "\n" + simpleDateFormat.format(new Date()));
-//        }
-//        System.out.println("BINGO!");
     }
 
 
@@ -74,9 +55,10 @@ public class EditController {
 
         Main main = new Main();
         resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
-        // Main.getPrimaryStage().close();
         main.createGUI(LocaleManager.currentLanguage.getLocale());
 
+
+//        Parent root = null;
 //            ResourceBundle resources = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
 //            root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"), resources);
 //            Scene scene = new Scene(root);
@@ -102,7 +84,6 @@ public class EditController {
                     + simpleDateFormat.format(new Date()).toString());
         }
         collectionNote.update(note);
-
         actionClose(event);
 
 

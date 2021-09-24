@@ -107,9 +107,6 @@ public class selectFolderController {
                     menuButton_folder_1.getItems().get(1).setDisable(true);
 
                 }
-
-
-
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -117,17 +114,12 @@ public class selectFolderController {
     }
 
     String listSelectToReplace() {
-
         String selectTable = "";
         ObservableList selectedIndices = listViewSelectFolder.getSelectionModel().getSelectedIndices();
         for (Object o : selectedIndices) {
             //System.out.println("o = " + o + " (" + o.getClass() + ")");
             selectTable = (String) Controller.dataTable.keySet().toArray()[(int) o];
-
-
         }
-
         return selectTable;
     }
-
 }

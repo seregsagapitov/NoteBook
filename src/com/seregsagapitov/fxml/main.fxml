@@ -10,13 +10,13 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<AnchorPane fx:id="MainAnchorPain" prefHeight="640.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seregsagapitov.controllers.Controller">
-   <children>
+<AnchorPane fx:id="MainAnchorPain" prefHeight="640.0" prefWidth="310.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seregsagapitov.controllers.Controller">
+    <children>
       <VBox fx:id="VboxMain" layoutY="33.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="310.0" spacing="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox prefHeight="54.0" prefWidth="310.0">
                <children>
-                  <MenuButton fx:id="menuButton" mnemonicParsing="false" onAction="#OnActionMenuButton" prefHeight="25.0" prefWidth="100.0" text="%NoteBook" HBox.hgrow="ALWAYS">
+                  <MenuButton fx:id="menuButton" mnemonicParsing="false" onAction="#OnActionMenuButton" prefHeight="30.0" prefWidth="114.0" text="%NoteBook" HBox.hgrow="ALWAYS">
                     <items>
                       <MenuItem fx:id="listFolders" mnemonicParsing="false" onAction="#choiseFolder" text="%AboutProgramm" />
                         <MenuItem fx:id="listFolders1" mnemonicParsing="false" onAction="#choiseFolder" text="%SelectFolder" />
@@ -24,7 +24,7 @@
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem fx:id="exportZipItem" mnemonicParsing="false" onAction="#exportToZipFile" text="%ExportZipFile" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="itemSetPassword" mnemonicParsing="false" onAction="#openSetPassWindow" text="Password" />
+                        <MenuItem fx:id="itemSetPassword" mnemonicParsing="false" onAction="#openSetPassWindow" text="%Password" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem fx:id="setting1" mnemonicParsing="false" onAction="#openSettingWindow" text="%Exit" />
                     </items>
@@ -39,7 +39,7 @@
                      </font>
                   </MenuButton>
                   <MenuBar />
-                  <MenuButton fx:id="menuButton_folder" mnemonicParsing="false" onAction="#OnActionMenuButton_folder" prefHeight="30.0" prefWidth="82.0" text="ппп" HBox.hgrow="ALWAYS">
+                  <MenuButton fx:id="menuButton_folder" mnemonicParsing="false" onAction="#OnActionMenuButton_folder" prefHeight="30.0" prefWidth="82.0" text="%Folder" HBox.hgrow="ALWAYS">
                     <items>
                       <MenuItem mnemonicParsing="false" text="%NewFolder" />
                       <MenuItem mnemonicParsing="false" text="%DelFolder" />
@@ -51,9 +51,9 @@
                         <Font size="14.0" />
                      </font>
                   </MenuButton>
-                  <Button fx:id="replaceButton" mnemonicParsing="false" onAction="#replaceNote" prefHeight="30.0" prefWidth="119.0" text="%Replace" HBox.hgrow="ALWAYS">
+                  <Button fx:id="replaceButton" mnemonicParsing="false" onAction="#replaceNote" prefHeight="30.0" prefWidth="113.0" text="%Replace">
                      <HBox.margin>
-                        <Insets left="3.0" right="3.0" top="3.0" />
+                        <Insets left="3.0" top="3.0" />
                      </HBox.margin>
                      <font>
                         <Font size="14.0" />
@@ -112,30 +112,43 @@
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="clearRecButton" mnemonicParsing="false" onAction="#clearRecycled" prefHeight="30.0" prefWidth="130.0" text="%ClearRecycled">
-                                 <padding>
-                                    <Insets top="3.0" />
-                                 </padding>
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
+                              <ComboBox fx:id="comboLocales" prefHeight="30.0" prefWidth="130.0" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="3.0" right="3.0" />
-                                 </HBox.margin>
-                              </Button>
+                                 </HBox.margin></ComboBox>
                            </children>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </HBox>
+                        <HBox prefHeight="100.0" prefWidth="296.0">
+                           <children>
+                              <Label fx:id="labelCount" prefHeight="30.0" prefWidth="172.0" text="%Count">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="3.0" left="3.0" top="3.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Button fx:id="clearRecButton" mnemonicParsing="false" onAction="#clearRecycled" prefHeight="30.0" prefWidth="132.0" text="%ClearRecycled">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets top="3.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" top="3.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets top="3.0" />
+                           </padding>
+                        </HBox>
                      </children>
                   </VBox>
-                  <Label fx:id="labelCount" layoutX="14.0" layoutY="41.0" prefHeight="13.0" prefWidth="172.0" text="%Count" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="38.0">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="comboLocales" layoutX="146.0" layoutY="36.0" prefHeight="30.0" prefWidth="130.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="34.0" />
                </children>
             </AnchorPane>
          </children>

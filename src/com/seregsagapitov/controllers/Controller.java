@@ -105,12 +105,7 @@ public class Controller extends Observable implements Initializable {
     private Parent fxmlColour;
     private Parent fxmlSetting;
     private Parent fxmlSetPass;
-    private FXMLLoader fxmlLoader1 = new FXMLLoader();
-    private FXMLLoader fxmlLoader2 = new FXMLLoader();
-    private FXMLLoader fxmlLoader3 = new FXMLLoader();
-    private FXMLLoader fxmlLoader4 = new FXMLLoader();
-    private FXMLLoader fxmlLoader5 = new FXMLLoader();
-    private FXMLLoader fxmlLoader6 = new FXMLLoader();
+
     private Stage setPasswordStage;
     private Stage choiceColourDialogStage;
     private Stage settingsDialogStage;
@@ -151,7 +146,10 @@ public class Controller extends Observable implements Initializable {
         } else {
             menuButton_folder.getItems().get(1).setDisable(false);
         }
-        clearRecButton.setVisible(false);
+
+        if(currentTable != "RECYCLED"){
+        clearRecButton.setVisible(false);}
+        else {clearRecButton.setVisible(true);}
 
 
         tableNote.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -171,22 +169,8 @@ public class Controller extends Observable implements Initializable {
         tableNote.setItems(collectionNote.getNoteList());
         updateCountLabel();
 
-        fxmlLoader4.setLocation(getClass().getResource("../fxml/choiceColour.fxml"));
-        fxmlLoader5.setLocation(getClass().getResource("../fxml/setts.fxml"));
-
-        fxmlLoader6.setLocation(getClass().getResource("../fxml/setPassword.fxml"));
 
 
-        //      try {
-//            fxmlEdit = fxmlLoader1.load();
-//            fxmlAdd = fxmlLoader2.load();
-        //      fxmlNewFolder = fxmlLoader3.load();
-//            fxmlColour = fxmlLoader4.load();
-//            fxmlSetting = fxmlLoader5.load();
-        fxmlSetPass = fxmlLoader6.load();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         ConnectDB.feelDataDB();
 
 
@@ -252,11 +236,20 @@ public class Controller extends Observable implements Initializable {
                                 exportToZipFile(event);
                             }
 
-                            if (item.getText().equals("Password")) {
+                            if (item.getText().equals(resourceBundle.getString("Password"))) {
                                 if (setPasswordStage == null) {
                                     setPasswordStage = new Stage();
                                     setPasswordStage.setTitle(resourceBundle.getString("SetPassword"));
                                     setPasswordStage.setResizable(false);
+                             ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.currentLanguage.getLocale());
+//
+                                    FXMLLoader fxmlLoader6 = new FXMLLoader(getClass().getResource("../fxml/setPassword.fxml"), resourceBundle);
+
+                                    try {
+                                        fxmlSetPass = fxmlLoader6.load();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                     setPasswordStage.setScene(new Scene(fxmlSetPass, 300, 150));
                                     setPasswordStage.initModality(Modality.WINDOW_MODAL);
                                     setPasswordStage.showAndWait();
@@ -513,7 +506,7 @@ public class Controller extends Observable implements Initializable {
                 //selectFolderController.getListViewSelectFolder().getItems().add();
             }
             stage.setTitle(resourceBundle.getString("SelectFolder"));
-            stage.setScene(new Scene(root, 300, 300));
+            stage.setScene(new Scene(root, 320, 300));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
         } catch (IOException e) {

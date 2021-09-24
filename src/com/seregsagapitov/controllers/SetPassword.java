@@ -15,13 +15,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class SetPassword {
-
-    @FXML
-    private Button setPassButton;
-
-    @FXML
-    private Button CancelPassButton;
-
     @FXML
     private PasswordField setPass;
 

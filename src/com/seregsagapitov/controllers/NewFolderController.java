@@ -26,14 +26,14 @@ public class NewFolderController {
 
     void actionClose(ActionEvent event) {
 
-//        Main main = new Main();
-//        resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
-//        // Main.getPrimaryStage().close();
-//        main.createGUI(LocaleManager.currentLanguage.getLocale());
-
         Node sourse = (Node) event.getSource();
         Stage stage = (Stage) sourse.getScene().getWindow();
         stage.close();
+
+
+        Main main = new Main();
+        resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
+                main.createGUI(LocaleManager.currentLanguage.getLocale());
     }
 
 
