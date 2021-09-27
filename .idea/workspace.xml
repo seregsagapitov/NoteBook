@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dc350f19-3391-42e9-b5d6-7abb691efdab" name="Default Changelist" comment="27/09/21 18:08">
+      <change beforePath="$PROJECT_DIR$/NOTETEXT_DB.db" beforeDir="false" afterPath="$PROJECT_DIR$/NOTETEXT_DB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/bundles/Locale_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/bundles/Locale_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/bundles/Locale_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/bundles/Locale_ru.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/newFolderNote.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/newFolderNote.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/com/seregsagapitov/start/Main.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/com/seregsagapitov/fxml/main.fxml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/com/seregsagapitov/fxml/selectFolder.fxml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/com/seregsagapitov/controllers/selectFolderController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/com/seregsagapitov/controllers/Controller.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/com/seregsagapitov/controllers/NewFolderController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/com/seregsagapitov/bundles/Locale_ru.properties" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/com/seregsagapitov/bundles/Locale_en.properties" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/com/seregsagapitov/utils/LocaleManager.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>
