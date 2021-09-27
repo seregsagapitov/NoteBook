@@ -4,17 +4,53 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc350f19-3391-42e9-b5d6-7abb691efdab" name="Default Changelist" comment="27/09/21 18:08">
+    <list default="true" id="08f393df-f292-45fd-b9e1-787ea865559e" name="Default Changelist" comment="09/07/21 17:37">
       <change beforePath="$PROJECT_DIR$/NOTETEXT_DB.db" beforeDir="false" afterPath="$PROJECT_DIR$/NOTETEXT_DB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/DB/ConnectDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/DB/ConnectDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/bundles/Locale_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/bundles/Locale_en.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/bundles/Locale_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/bundles/Locale_ru.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/ChoiceColourController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/EditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/EditController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/NewFolderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/NewFolderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/NewNoteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/NewNoteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/SetPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/SetPassword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/SettingsController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/selectFolderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/selectFolderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/selectFolderReplaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/selectFolderReplaceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/Password.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/Password.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/choiceColour.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/editNote.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/editNote.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/main.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/newFolderNote.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/newFolderNote.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/newNote.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/newNote.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/selectFolder.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/selectFolder.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/selectFolderReplace.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/selectFolderReplace.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/setPassword.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/setPassword.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/setts.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/setts.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/interfaces/NoteImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/interfaces/NoteImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/interfaces/impls/CollectionNote.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/interfaces/impls/CollectionNote.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/objects/Language.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/objects/Language.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/objects/Note.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/objects/Note.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/start/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/start/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/utils/DialogManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/utils/DialogManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/utils/LocaleManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/utils/LocaleManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="origin/master" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -30,11 +66,155 @@
     <setting file="file://$PROJECT_DIR$/src/com/seregsagapitov/bundles/Locale_en.properties" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/com/seregsagapitov/utils/LocaleManager.java" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="ProjectId" id="1tygH0M6afgyJvbz0kEuAO53Gur" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Facets" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.seregsagapitov.start.Main" />
+      <module name="NoteBook" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.seregsagapitov.start.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="08f393df-f292-45fd-b9e1-787ea865559e" name="Default Changelist" comment="" />
+      <created>1623746653229</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1623746653229</updated>
+      <workItem from="1623746654584" duration="223000" />
+      <workItem from="1623746887889" duration="710000" />
+      <workItem from="1623747610159" duration="2290000" />
+      <workItem from="1623749962978" duration="289000" />
+      <workItem from="1623750260718" duration="81000" />
+      <workItem from="1623750799333" duration="3049000" />
+      <workItem from="1623754625536" duration="302000" />
+      <workItem from="1623993197132" duration="6098000" />
+      <workItem from="1624415699387" duration="307000" />
+      <workItem from="1624416019296" duration="785000" />
+      <workItem from="1625621995758" duration="9016000" />
+      <workItem from="1625646857542" duration="2386000" />
+      <workItem from="1625711072110" duration="3612000" />
+      <workItem from="1625798525951" duration="22415000" />
+      <workItem from="1628650969114" duration="16032000" />
+      <workItem from="1630388159615" duration="1319000" />
+      <workItem from="1632732461013" duration="611000" />
+      <workItem from="1632733127491" duration="209000" />
+      <workItem from="1632733458777" duration="5114000" />
+    </task>
+    <task id="LOCAL-00001" summary="1">
+      <created>1623746857320</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1623746857320</updated>
+    </task>
+    <task id="LOCAL-00002" summary="2">
+      <created>1623746926434</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1623746926434</updated>
+    </task>
+    <task id="LOCAL-00003" summary="2">
+      <created>1623747428991</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1623747428991</updated>
+    </task>
+    <task id="LOCAL-00004" summary="2">
+      <created>1623747573496</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1623747573496</updated>
+    </task>
+    <task id="LOCAL-00005" summary="2">
+      <created>1623750319088</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1623750319088</updated>
+    </task>
+    <task id="LOCAL-00006" summary="2">
+      <created>1623754473807</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1623754473807</updated>
+    </task>
+    <task id="LOCAL-00007" summary="18/06/21 13:02">
+      <created>1623996187824</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1623996187824</updated>
+    </task>
+    <task id="LOCAL-00008" summary="07/07/21 16:53">
+      <created>1625651674802</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1625651674802</updated>
+    </task>
+    <task id="LOCAL-00009" summary="09/07/21 17:37">
+      <created>1625827033036</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1625827033067</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -47,5 +227,18 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="1" />
+    <MESSAGE value="2" />
+    <MESSAGE value="18/06/21 13:02" />
+    <MESSAGE value="07/07/21 16:53" />
+    <MESSAGE value="09/07/21 17:37" />
+    <option name="LAST_COMMIT_MESSAGE" value="09/07/21 17:37" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
