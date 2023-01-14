@@ -36,13 +36,11 @@ public class NewFolderController {
                 main.createGUI(LocaleManager.currentLanguage.getLocale());
     }
 
-
     @FXML
     void closeWindowNewFolder(ActionEvent event) {
         actionClose(event);
 
     }
-
     @FXML
     void createNewFolderAction(ActionEvent event) throws ClassNotFoundException, SQLException {
         ConnectDB.connect();

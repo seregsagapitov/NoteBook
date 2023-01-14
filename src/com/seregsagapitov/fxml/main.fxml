@@ -16,9 +16,9 @@
          <children>
             <HBox prefHeight="54.0" prefWidth="310.0">
                <children>
-                  <MenuButton fx:id="menuButton" mnemonicParsing="false" onAction="#OnActionMenuButton" prefHeight="30.0" prefWidth="114.0" text="%NoteBook" HBox.hgrow="ALWAYS">
+                  <MenuButton fx:id="menuButton" mnemonicParsing="false" onAction="#OnActionMenuButton" prefHeight="30.0" prefWidth="104.0" text="%NoteBook" HBox.hgrow="ALWAYS">
                     <items>
-                      <MenuItem fx:id="listFolders" mnemonicParsing="false" onAction="#choiseFolder" text="%AboutProgramm" />
+                      <MenuItem fx:id="listFolders" mnemonicParsing="false" onAction="#choiseFolder" text="%AboutProg" />
                         <MenuItem fx:id="listFolders1" mnemonicParsing="false" onAction="#choiseFolder" text="%SelectFolder" />
                         <MenuItem mnemonicParsing="false" text="%Recycled" />
                         <SeparatorMenuItem mnemonicParsing="false" />
@@ -96,7 +96,7 @@
                      <children>
                         <HBox prefHeight="41.0" prefWidth="296.0">
                            <children>
-                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#addNote" prefHeight="25.0" prefWidth="52.0" text="+" HBox.hgrow="ALWAYS">
+                              <Button fx:id="addButton" mnemonicParsing="false" onAction="#addNote" prefHeight="30.0" prefWidth="34.0" text="+" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="3.0" />
                                  </HBox.margin>
@@ -104,7 +104,7 @@
                                     <Font size="14.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="delButton" mnemonicParsing="false" onAction="#delNote" prefHeight="25.0" prefWidth="118.0" text="%DelNote" HBox.hgrow="ALWAYS">
+                              <Button fx:id="delButton" mnemonicParsing="false" onAction="#delNote" prefHeight="30.0" prefWidth="132.0" text="%DelNote" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="3.0" />
                                  </HBox.margin>

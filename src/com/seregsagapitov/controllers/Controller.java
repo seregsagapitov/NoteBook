@@ -114,7 +114,8 @@ public class Controller extends Observable implements Initializable {
     private NewNoteController newNoteController;
     public selectFolderController selectFolderController;
     public LoginController loginController;
-    selectFolderReplaceController selectFolderReplaceController;
+    public selectFolderReplaceController selectFolderReplaceController;
+    public AboutProgController aboutProgController;
     public static boolean replaceOn;
     ResourceBundle resourceBundle;
 
@@ -211,6 +212,13 @@ public class Controller extends Observable implements Initializable {
                     item.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
+
+
+                            if (item.getText().equals(resourceBundle.getString("AboutProg"))) {
+                                openAboutProg(event);
+                            }
+
+
                             if (item.getText().equals(resourceBundle.getString("SelectFolder"))) {
                                 selectFolderMenu(event);
                             }
@@ -485,6 +493,30 @@ public class Controller extends Observable implements Initializable {
 
     }
 
+    // Открытие информационного окна о программе
+
+    public void openAboutProg(ActionEvent actionEvent) {
+        try {
+            Stage stage = new Stage();
+            ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.currentLanguage.getLocale());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/aboutProg.fxml"), resourceBundle);
+            Parent root = loader.load();
+            aboutProgController = loader.getController();
+
+            stage.setTitle(resourceBundle.getString("AboutProg"));
+            stage.setScene(new Scene(root, 310, 300));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
     // Выбор активной папки
     public void selectFolderMenu(ActionEvent actionEvent) {
         try {
@@ -550,12 +582,8 @@ public class Controller extends Observable implements Initializable {
     @FXML
     private void exportToZipFile(ActionEvent event) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
-
         directoryChooser.setTitle("Выбор папки для Zip-архива");
-
         File selectedDir = directoryChooser.showDialog(tableNote.getScene().getWindow());
-
-
         Path pathRoot = Paths.get("Notebook");
         try {
             Files.createDirectory(pathRoot);
