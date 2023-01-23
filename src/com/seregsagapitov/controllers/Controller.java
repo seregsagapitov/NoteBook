@@ -24,10 +24,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.Window;
+import javafx.stage.*;
 
 import java.awt.event.MouseEvent;
 import java.io.*;
@@ -117,7 +114,7 @@ public class Controller extends Observable implements Initializable {
     public selectFolderReplaceController selectFolderReplaceController;
     public AboutProgController aboutProgController;
     public static boolean replaceOn;
-    ResourceBundle resourceBundle;
+    public ResourceBundle resourceBundle;
 
 
     public static TreeMap<String, String> dataTable = new TreeMap<>();
@@ -128,8 +125,8 @@ public class Controller extends Observable implements Initializable {
 
 
     static {
-        dataTable.put("NOTES", "Мои заметки");
-        dataTable.put("RECYCLED", "Корзина");
+        dataTable.put("NOTES", "Мои заметки / My Notes");
+        dataTable.put("RECYCLED", "Корзина / Recycled");
         currentTable = "NOTES";
 
     }
@@ -148,10 +145,11 @@ public class Controller extends Observable implements Initializable {
             menuButton_folder.getItems().get(1).setDisable(false);
         }
 
-        if(currentTable != "RECYCLED"){
-        clearRecButton.setVisible(false);}
-        else {clearRecButton.setVisible(true);}
-
+        if (currentTable != "RECYCLED") {
+            clearRecButton.setVisible(false);
+        } else {
+            clearRecButton.setVisible(true);
+        }
 
         tableNote.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         columnNotes.setCellValueFactory(new PropertyValueFactory<Note, String>("title"));
@@ -169,7 +167,6 @@ public class Controller extends Observable implements Initializable {
 
         tableNote.setItems(collectionNote.getNoteList());
         updateCountLabel();
-
 
 
         ConnectDB.feelDataDB();
@@ -218,7 +215,6 @@ public class Controller extends Observable implements Initializable {
                                 openAboutProg(event);
                             }
 
-
                             if (item.getText().equals(resourceBundle.getString("SelectFolder"))) {
                                 selectFolderMenu(event);
                             }
@@ -232,7 +228,6 @@ public class Controller extends Observable implements Initializable {
                                 }
                                 columnNotes.setText(Controller.dataTable.get(Controller.currentTable));
                                 menuButton_folder.getItems().get(1).setDisable(true);
-
                                 delButton.setDisable(true);
                                 addButton.setDisable(true);
                                 clearRecButton.setVisible(true);
@@ -249,7 +244,7 @@ public class Controller extends Observable implements Initializable {
                                     setPasswordStage = new Stage();
                                     setPasswordStage.setTitle(resourceBundle.getString("SetPassword"));
                                     setPasswordStage.setResizable(false);
-                             ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.currentLanguage.getLocale());
+                                    ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.currentLanguage.getLocale());
 //
                                     FXMLLoader fxmlLoader6 = new FXMLLoader(getClass().getResource("../fxml/setPassword.fxml"), resourceBundle);
 
@@ -336,28 +331,6 @@ public class Controller extends Observable implements Initializable {
                 }
             }
         });
-
-
-//        Platform.runLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                // слушаем изменение языка
-//                comboLocales.setOnAction(new EventHandler<ActionEvent>() {
-//                    @Override
-//                    public void handle(ActionEvent event) {
-//                        Language selectedLang = (Language) comboLocales.getSelectionModel().getSelectedItem();
-//                        LocaleManager.setCurrentLanguage(selectedLang);
-//
-//                        // уведомить всех слушателей, что произошла смена языка
-//                        setChanged();
-//                        notifyObservers(selectedLang);
-//                        System.out.println("Изменение языка");
-//                        //fillLangCombobox();
-//                    }
-//                });
-//
-//            }
-//        });
     }
 
     public void listenCombo() {
@@ -470,10 +443,7 @@ public class Controller extends Observable implements Initializable {
         ArrayList<Note> rows = new ArrayList<>(selectedNotes);
 
         collectionNote.delete(rows);
-//        for (Note row : rows) {
-//            collectionNote.delete(row);
 //
-//        }
     }
 
 
@@ -484,7 +454,6 @@ public class Controller extends Observable implements Initializable {
     ////////////////////////////////////////////////////////////////////////////////////
     @FXML
     void replaceNote(ActionEvent event) {
-
 //        ObservableList<Note> selectedNotes = tableNote.getSelectionModel().getSelectedItems();
 //        ArrayList<Note> rows = new ArrayList<>(selectedNotes);
         replaceOn = true;
@@ -494,17 +463,91 @@ public class Controller extends Observable implements Initializable {
     }
 
     // Открытие информационного окна о программе
-
     public void openAboutProg(ActionEvent actionEvent) {
         try {
             Stage stage = new Stage();
+            String context;
             ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.currentLanguage.getLocale());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/aboutProg.fxml"), resourceBundle);
             Parent root = loader.load();
             aboutProgController = loader.getController();
+            if (LocaleManager.getCurrentLanguage().getCode().equals("ru")) {
+                context = "Программа \"Блокнот\" разаботана на основе JavaFX в виде Maven-проекта.\n" +
+                        "Основная функция приложения - внесения записей и их сохранение.\n" +
+                        "В качестве основного окна спользуется папка \"Мои заметки\".\n" +
+                        "При добавлении/изменении записи также фиксируется время сохранения или изменеия записи.\n" +
+                        "Можно создавать дополнительные папки, например, чтобы разделить тематические разделы.\n" +
+                        "Записи можно добавлять, редактировать, удалять, перемещать в другую папку.\n" +
+                        "Удаляются записи в Корзину, из которой записи можно восстанавливать в любую папку.\n" +
+                        "Папки \"Мои заметки\" и \"Корзина\" статичны, их удалить нельзя.\n" +
+                        "\n" +
+                        "Строка Меню состоит из 3-х кнопок:\n" +
+                        "- \"Блокнот\" (Основное меню Блокнот);\n" +
+                        "- \"Папка\" (Добавление/удаление папки);\n" +
+                        "- \"Переместить\" (Перемещение папки).\n" +
+                        "\n" +
+                        "Основное меню состоит из следующих пунктов:\n" +
+                        "- О программе;\n" +
+                        "- Выбор текущей папки;\n" +
+                        "- Выбор папки Корзина;\n" +
+                        "- Экспорт содержимого всех папок в Zip-файл с указанием пути сохранения;\n" +
+                        "- Установка пароля на приложение (по умолчанию пароля нет);\n" +
+                        "- Выход.\n" +
+                        "\n" +
+                        "Под основым меню есть текстовое поле поиска по текущей папке.\n" +
+                        "\n" +
+                        "Под основным окном содержимого папки имеются кнопки:\n" +
+                        "- \"+\" (Добавить запись);\n" +
+                        "- Удалить запись;\n" +
+                        "- Переключение локали (Русский/Английский).\n" +
+                        "\n" +
+                        "В самом низу основного окна имеется счетчик количества записей в текущей папке.\n" +
+                        "\n" +
+                        "Размер основного окна неизменяемый. На основном окне в текущей папке показана часть строки\n" +
+                        "с датой и временем создания/изменения записи.\n" +
+                        "Используемая база данных - SQLite.\n" +
+                        "\n";
+            } else {
+                context = "The NoteBook program is developed on the basis of JavaFX in the form of a Maven-project.\n" +
+                        "The main function of the application is to make records and save them.\n" +
+                        "The \"My Notes\" folder is used as the main window.\n" +
+                        "When adding/changing a record, the time of saving or changing the record is also recorded.\n" +
+                        "You can create additional folders, for example, to separate thematic sections.\n" +
+                        "Records can be added, edited, deleted, moved to another folder.\n" +
+                        "Records are deleted to the Trash, from which records can be restored to any folder.\n" +
+                        "The folders \"My Notes\" and \"Recycled\" are static, they cannot be deleted.\n" +
+                        "\n" +
+                        "The menu bar consists of 3 buttons:\n" +
+                        "- \"NoteBook\" (The main NoteBook menu);\n" +
+                        "- \"Folder\" (Add/Remove folder);\n" +
+                        "- \"Replace\" (Move folder).\n" +
+                        "\n" +
+                        "The main menu consists of the following items:\n" +
+                        "- About program;\n" +
+                        "- Select Folder;\n" +
+                        "- Recycled;\n" +
+                        "- Export toZip-file with the save path;\n" +
+                        "- Setting a password for the application (there is no password by default);\n" +
+                        "- Exit.\n" +
+                        "\n" +
+                        "Under the main menu there is a text field for searching for the current folder.\n" +
+                        "\n" +
+                        "Under the main window of the folder contents there are buttons:\n" +
+                        "- \"+\" (Add note);\n" +
+                        "-\" Delete Note\";\n" +
+                        "- Switching locale (Russian/English).\n" +
+                        "\n" +
+                        "At the very bottom of the main window there is a counter for the number of notes in the current folder.\n" +
+                        "\n" +
+                        "The size of the main window is immutable. The main window in the current folder shows part of the line\n" +
+                        "with the date and time of creation/modification of the record.\n" +
+                        "The database used is SQLite.";
+            }
 
+
+            aboutProgController.TextAreaAboutProgramm.setText(context);
             stage.setTitle(resourceBundle.getString("AboutProg"));
-            stage.setScene(new Scene(root, 310, 300));
+            stage.setScene(new Scene(root, 700, 400));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
             stage.showAndWait();
@@ -514,7 +557,6 @@ public class Controller extends Observable implements Initializable {
 
 
     }
-
 
 
     // Выбор активной папки
@@ -558,34 +600,25 @@ public class Controller extends Observable implements Initializable {
     }
 
 
-    //////////////////////////////////////////////////////////////////////////////////
-
-//    void passwordWindow() {
-//        try {
-//            Stage stage = new Stage();
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Password.fxml"));
-//            Parent root = loader.load();
-//
-//            stage.setTitle("NoteMain/Password");
-//            stage.setScene(new Scene(root, 400, 200));
-//            stage.initModality(Modality.APPLICATION_MODAL);
-//            stage.showAndWait();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-
     // Сохранение данных приложения в Zip-файл
 
     @FXML
     private void exportToZipFile(ActionEvent event) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        directoryChooser.setTitle("Выбор папки для Zip-архива");
+        if (LocaleManager.getCurrentLanguage().getCode().equals("ru")) {
+            directoryChooser.setTitle("Выбор папки для Zip-архива");
+        } else {
+            directoryChooser.setTitle("Selecting a folder for a Zip archive");
+        }
         File selectedDir = directoryChooser.showDialog(tableNote.getScene().getWindow());
         Path pathRoot = Paths.get("Notebook");
         try {
-            Files.createDirectory(pathRoot);
+            if (selectedDir.exists()) {
+                Files.createDirectory(pathRoot);
+            } else {
+                return;
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -608,7 +641,6 @@ public class Controller extends Observable implements Initializable {
                 ResultSet rs = stmt.executeQuery(query);
 
                 while (rs.next()) {
-
                     noteList.add(new Note(rs.getString("NOTETEXT"), rs.getString("DATE"), rs.getInt("ID")));
                 }
             } catch (SQLException throwables) {
@@ -664,9 +696,11 @@ public class Controller extends Observable implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        createAlertMessage("Создание Zip-архива", "Zip-архив " + Paths.get(zipFile).getFileName() + " успешно создан!", "Размер архива: " + new File(zipFile).length() + " байт");
-
-
+        if (LocaleManager.getCurrentLanguage().getCode().equals("ru")) {
+            createAlertMessage("Создание Zip-архива", "Zip-архив " + Paths.get(zipFile).getFileName() + " успешно создан!", "Размер архива: " + new File(zipFile).length() + " байт");
+        } else {
+            createAlertMessage("Creating a Zip archive", "Zip-archive " + Paths.get(zipFile).getFileName() + " successfully created!", "Archive size: " + new File(zipFile).length() + " bytes");
+        }
     }
 
     private void Zip(String source_dir, String zip_file) throws Exception {
@@ -712,12 +746,18 @@ public class Controller extends Observable implements Initializable {
     }
     // Создание информационного окна
 
-    void createAlertMessage(String title, String headerText, String contentText) {
+    public void createAlertMessage(String title, String headerText, String contentText) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
         alert.setTitle(title);
         alert.setHeaderText(headerText);
         alert.setContentText(contentText);
         alert.showAndWait();
+
+
     }
 
 
@@ -726,9 +766,18 @@ public class Controller extends Observable implements Initializable {
     void clearRecycled(ActionEvent event) {
         int sizeRecycled = collectionNote.getNoteList().size();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Корзина");
-        alert.setHeaderText("Все файлы корзины будут удалены безвозвратно");
-        alert.setContentText("Вы хотите очистить корзину?");
+
+        DialogPane dialogPane = alert.getDialogPane();
+        dialogPane.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+        if (LocaleManager.getCurrentLanguage().getCode().equals("ru")) {
+
+            alert.setTitle("Корзина");
+            alert.setHeaderText("Все файлы корзины будут удалены безвозвратно");
+        } else {
+            alert.setTitle("Recycled");
+            alert.setHeaderText("All files will be permanently deleted");
+        }
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
@@ -738,22 +787,24 @@ public class Controller extends Observable implements Initializable {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            createAlertMessage("Корзина очищена", "Корзина успешно очищена!", "Удалено " + sizeRecycled + " записей(сь)");
+            if (LocaleManager.getCurrentLanguage().getCode().equals("ru")) {
+                createAlertMessage("Корзина очищена", "Корзина успешно очищена!", "Удалено " + sizeRecycled + " записей(сь)");
+            } else {
+                createAlertMessage("The Recycled is cleared", "The Recycled has been successfully cleared!", "Deleted " + sizeRecycled + " records");
+            }
+
+
         } else {
             alert.close();
         }
-
-
     }
 
     @FXML
     void OnActionMenuButton_folder(ActionEvent event) {
     }
 
-
     @FXML
     void choiseFolder(ActionEvent event) {
-
     }
 
     @FXML
@@ -762,7 +813,6 @@ public class Controller extends Observable implements Initializable {
 
     @FXML
     void openSettingWindow(ActionEvent event) {
-
     }
 
     void openWindowCoiceColour(ActionEvent event) throws IOException {
@@ -777,21 +827,6 @@ public class Controller extends Observable implements Initializable {
             choiceColourDialogStage.show();
         }
     }
-
-    void openWindowCoSetting(ActionEvent event) throws IOException {
-
-        if (settingsDialogStage == null) {
-            settingsDialogStage = new Stage();
-            settingsDialogStage.setTitle("Настройки");
-            settingsDialogStage.setResizable(false);
-            settingsDialogStage.setScene(new Scene(fxmlSetting, 300, 250));
-            settingsDialogStage.initModality(Modality.WINDOW_MODAL);
-            settingsDialogStage.showAndWait();
-        } else {
-            settingsDialogStage.show();
-        }
-    }
-
 
     @FXML
     void OnActionMenuButton(ActionEvent event) {

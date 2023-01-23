@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="150.0" prefWidth="300.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.seregsagapitov.controllers.NewFolderController">
    <children>
-      <TextField fx:id="labelNewFolder" layoutX="44.0" layoutY="52.0" onAction="#createNewFolderAction" prefHeight="25.0" prefWidth="199.0" promptText="Новая папка" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <TextField fx:id="labelNewFolder" layoutX="44.0" layoutY="52.0" onAction="#createNewFolderAction" prefHeight="25.0" prefWidth="199.0" promptText="%NewFolder" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>
@@ -21,7 +21,7 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button fx:id="CancelNewFolder" layoutX="34.0" layoutY="94.0" mnemonicParsing="false" onAction="#closeWindowNewFolder" text="ОТМЕНА" />
+      <Button fx:id="CancelNewFolder" layoutX="34.0" layoutY="94.0" mnemonicParsing="false" onAction="#closeWindowNewFolder" text="%Cancel" />
       <Button fx:id="createNewFolderButton" layoutX="104.0" layoutY="94.0" mnemonicParsing="false" onAction="#createNewFolderAction" text="ОК" />
    </children>
 </AnchorPane>

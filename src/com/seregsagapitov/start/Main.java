@@ -104,45 +104,4 @@ public class Main extends Application implements Observer {
         primaryStage.show();
     }
 
-
-    //    private Controller controller;
-//
-//    @Override
-//    public void start(Stage primaryStage) throws Exception {
-//        if (ConnectDB.selectPassword().equals("")) {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/main.fxml"));
-//          // loader.setResources(ResourceBundle.getBundle("../bundles/Locale_en.properties", new Locale("ru")));
-//            Parent root = loader.load();
-//           // controller.addObserver(this);
-//            //Parent root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
-//            //primaryStage.initStyle(StageStyle.TRANSPARENT);
-//            //primaryStage.setTitle(loader.getResources().getString("NoteBook"));
-//            primaryStage.setTitle("NoteBook");
-//            primaryStage.setResizable(false);
-//            Scene scene = new Scene(root, 300, 640);
-//            //scene.setFill(Color.TRANSPARENT);
-//            primaryStage.setScene(scene);
-//            primaryStage.show();
-//        } else {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/Password.fxml"));
-//            Parent root = loader.load();
-//
-//            primaryStage.setTitle("NoteMain");
-//            primaryStage.setResizable(false);
-//            Scene scene = new Scene(root, 300, 100);
-//
-//
-//            primaryStage.setScene(scene);
-//            primaryStage.show();
-//
-//        }
-//    }
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
-//
-//    @Override
-//    public void update(Observable o, Object arg) {
-//        Language language = (Language) arg;
-//    }
 }

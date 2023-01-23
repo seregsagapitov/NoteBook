@@ -10,7 +10,8 @@ import javafx.stage.Stage;
 
 public class AboutProgController {
 
-
+    @FXML
+    public TextArea TextAreaAboutProgramm;
     @FXML
     private Text TextInfo;
 

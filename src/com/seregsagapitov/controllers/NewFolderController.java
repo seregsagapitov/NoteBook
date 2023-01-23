@@ -2,6 +2,7 @@ package com.seregsagapitov.controllers;
 
 import com.seregsagapitov.DB.ConnectDB;
 import com.seregsagapitov.interfaces.impls.CollectionNote;
+import com.seregsagapitov.objects.Language;
 import com.seregsagapitov.objects.Note;
 import com.seregsagapitov.start.Main;
 import com.seregsagapitov.utils.LocaleManager;
@@ -33,7 +34,7 @@ public class NewFolderController {
 
         Main main = new Main();
         resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
-                main.createGUI(LocaleManager.currentLanguage.getLocale());
+        main.createGUI(LocaleManager.currentLanguage.getLocale());
     }
 
     @FXML
@@ -41,6 +42,7 @@ public class NewFolderController {
         actionClose(event);
 
     }
+
     @FXML
     void createNewFolderAction(ActionEvent event) throws ClassNotFoundException, SQLException {
         ConnectDB.connect();
@@ -62,9 +64,48 @@ public class NewFolderController {
         ps = connection.prepareStatement("INSERT INTO NAMES ( NAME_BASE, TITLE_BASE) VALUES (?,?);");
         ps.setString(1, Controller.currentTable);
         ps.setString(2, labelNewFolder.getText());
-        Controller.dataTable.put(Controller.currentTable, labelNewFolder.getText());
-        ConnectDB.showData(CollectionNote.noteList);
-        columnNotesNewFolder.setText(Controller.dataTable.get(Controller.currentTable));
+
+
+//
+
+        if (!labelNewFolder.getText().equals("")) {
+
+            if (!Controller.dataTable.containsValue(labelNewFolder.getText())) {
+                Controller.dataTable.put(Controller.currentTable, labelNewFolder.getText());
+                ConnectDB.showData(CollectionNote.noteList);
+                columnNotesNewFolder.setText(Controller.dataTable.get(Controller.currentTable));
+
+
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+                if (LocaleManager.getCurrentLanguage().getCode().equals("ru")) {
+                    alert.setHeaderText("Папка с таким именем уже существует!");
+                } else {
+                    alert.setHeaderText("A folder with that name already exists!");
+                }
+                alert.showAndWait();
+                labelNewFolder.clear();
+                return;
+            }
+        } else {
+            if (labelNewFolder.getText().equals("")) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                DialogPane dialogPane = alert.getDialogPane();
+                dialogPane.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+                if (LocaleManager.getCurrentLanguage().getCode().equals("ru")) {
+                    alert.setHeaderText("Имя папки не должно быть NULL !");
+                } else {
+                    alert.setHeaderText("The folder name must not be NULL !");
+                }
+                alert.showAndWait();
+                labelNewFolder.clear();
+                return;
+            }
+
+        }
+
 
         System.out.println(Controller.dataTable.get(Controller.currentTable) + " новая папка");
         labelNewFolder.clear();
