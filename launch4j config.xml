@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\User\IdeaProjects\NoteBook\out\artifacts\NoteBook_jar\NoteBook.jar</jar>
+  <outfile>C:\Users\User\IdeaProjects\NoteBook\out\artifacts\NoteBook_jar\NoteBook.exe</outfile>
+  <errTitle>You have to download newest Java version</errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Users\User\IdeaProjects\NoteBook\icons\Notepad_22553.ico</icon>
+  <singleInstance>
+    <mutexName>NoteBook</mutexName>
+    <windowTitle></windowTitle>
+  </singleInstance>
+  <jre>
+    <path>%JAVA_HOME%;%PATH%</path>
+    <requiresJdk>true</requiresJdk>
+    <requires64Bit>true</requires64Bit>
+    <minVersion>1.6.0</minVersion>
+    <maxVersion>1.9.0</maxVersion>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.0.0.0</fileVersion>
+    <txtFileVersion>1.0</txtFileVersion>
+    <fileDescription>Cross-platform JavaFX application</fileDescription>
+    <copyright>Copyright (C) 2023, Sergei Agapitov</copyright>
+    <productVersion>1.0.0.0</productVersion>
+    <txtProductVersion>1.0</txtProductVersion>
+    <productName>NoteBook</productName>
+    <companyName></companyName>
+    <internalName>NoteBook</internalName>
+    <originalFilename>NoteBook.exe</originalFilename>
+    <trademarks></trademarks>
+    <language>RUSSIAN</language>
+  </versionInfo>
+</launch4jConfig>

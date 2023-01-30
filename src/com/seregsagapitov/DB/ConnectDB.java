@@ -43,17 +43,6 @@ public class ConnectDB {
                     ");");
 
 
-//            CREATE TABLE NAMES (
-//                    ID_NAMES   INT (32)      PRIMARY KEY
-//                    UNIQUE
-//                    NOT NULL,
-//                    NAME_BASE  VARCHAR (256) UNIQUE
-//                    NOT NULL,
-//                    TITLE_BASE VARCHAR (256) UNIQUE
-//                    NOT NULL
-//            );
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -135,48 +124,26 @@ public class ConnectDB {
         disconnect();
     }
 
-    // Обновление таблицы NAMES
-//    public static void updateDataNAMES(Note note) throws SQLException {
-//        connect();
-//        ps = connection.prepareStatement("UPDATE NAMES SET SET NAME_BASE = ? TITLE_BASE = ?;");
-//
-//        ps.executeUpdate();
-//        ps.close();
-//        disconnect();
-//    }
-
     // Очистка корзины
     public static void deleteFromRecycled() {
         connect();
-        String sql1 = "DROP TABLE " + (Controller.currentTable) +";";
+        String sql1 = "DROP TABLE " + (Controller.currentTable) + ";";
 
         try {
             stmt = connection.createStatement();
             stmt.execute(sql1);
-           // stmt.execute(sql2);
+            // stmt.execute(sql2);
             stmt.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         disconnect();
-
-
     }
-
 
     // Удаление данных из БД (Из Текущей таблицы)
     public static void deleteData(ArrayList<Note> notes) throws SQLException {
-//        connect();
-//        ps = connection.prepareStatement("DELETE FROM " + Controller.currentTable + " WHERE ID = ?");
-//        ps.setInt(1, note.getId());
-//        System.out.println(note.getId() + " удаляемая строка");
-//        ps.executeUpdate();
-//        ps.close();
-//        disconnect();
 
         replaceFrom(notes, "RECYCLED");
-
-
     }
 
     // Удаление данных из БД (строки из NAMES)
@@ -224,18 +191,6 @@ public class ConnectDB {
             e.printStackTrace();
         }
     }
-
-    // Перемещение данных в другую папку
-//    INSERT Table2 (
-//            username,password
-//            ) SELECT username,password
-//    FROM    (
-//            DELETE Table1
-//           OUTPUT
-//                   DELETED.username,
-//            DELETED.password
-//                    WHERE username = 'X' and password = 'X'
-//    ) AS RowsToMove ;
 
     public static void replaceFrom(ArrayList<Note> notes, String newTable) throws SQLException {
         connect();

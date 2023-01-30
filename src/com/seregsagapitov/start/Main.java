@@ -2,20 +2,14 @@ package com.seregsagapitov.start;
 
 import com.seregsagapitov.DB.ConnectDB;
 import com.seregsagapitov.controllers.Controller;
-import com.seregsagapitov.controllers.LoginController;
 import com.seregsagapitov.objects.Language;
 import com.seregsagapitov.utils.LocaleManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import sun.security.util.Password;
-
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Observable;
@@ -36,7 +30,6 @@ public class Main extends Application implements Observer {
     private Parent fxmlMain;
     private Controller controller;
     private FXMLLoader fxmlLoader;
-
     private AnchorPane currentRoot;
 
 
@@ -72,10 +65,7 @@ public class Main extends Application implements Observer {
         Language language = (Language) arg;
         AnchorPane newNode = loadFXML(language.getLocale()); // получить новое дерево компонентов  с нужной локалью
         currentRoot.getChildren().setAll(newNode.getChildren()); // заменить старые дочерние компоненты на новые
-
-
     }
-
 
     // Загружаем дерево компонентов и возвращаем в виде AnchorPane (корневой элемент в FXML)
     private AnchorPane loadFXML(Locale locale) {

@@ -30,19 +30,13 @@ public class LoginController {
     private Stage stage;
     @FXML
     public Label labelPass;
-
     @FXML
     public PasswordField passField;
-
     @FXML
     private AnchorPane PassPain;
-
     @FXML
     private Button EnterMain;
 
-    //    public void setStage(Stage stage) {
-//        this.stage = stage;
-//    }
     @FXML
     void EnterMain(ActionEvent event) throws SQLException, InterruptedException {
         if (passField.getText().equals(ConnectDB.selectPassword())) {
@@ -50,19 +44,9 @@ public class LoginController {
             Main main = new Main();
             resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
             main.createGUI(LocaleManager.RU_LOCALE);
-
-//            Parent root = null;
-//                ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/main.fxml"), resourceBundle);
-//                root = loader.load();
-//                Scene scene = new Scene(root);
-//                ((Stage) PassPain.getScene().getWindow()).setScene(scene);
-
-
         } else {
             labelPass.setVisible(true);
             passField.clear();
-            //labelPass.setVisible(false);
             passField.requestFocus();
             Platform.runLater(new Runnable() {
                 @Override

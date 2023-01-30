@@ -9,18 +9,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08f393df-f292-45fd-b9e1-787ea865559e" name="Default Changelist" comment="15/01/23 00:55">
-      <change afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/О программе Блокнот.txt" afterDir="false" />
+    <list default="true" id="08f393df-f292-45fd-b9e1-787ea865559e" name="Default Changelist" comment="24/01/23 00:34">
+      <change afterPath="$PROJECT_DIR$/icons/Notepad_22522.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icons/Notepad_22522.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icons/Notepad_22553.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icons/Notepad_22553.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/launch4j config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/NoteBook_jar/NOTETEXT_DB.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/NoteBook_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/NoteBook_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOTETEXT_DB.db" beforeDir="false" afterPath="$PROJECT_DIR$/NOTETEXT_DB.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/bundles/Locale_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/bundles/Locale_en.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/bundles/Locale_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/bundles/Locale_ru.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/AboutProgController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/AboutProgController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/NoteBook_jar/NoteBook.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/NoteBook_jar/NoteBook.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/DB/ConnectDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/DB/ConnectDB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/EditController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/EditController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/NewFolderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/NewFolderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/aboutProg.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/aboutProg.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/newFolderNote.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/newFolderNote.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/NewNoteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/NewNoteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/selectFolderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/selectFolderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/selectFolderReplaceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/selectFolderReplaceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/controllers/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/fxml/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/objects/Note.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/objects/Note.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/seregsagapitov/start/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/seregsagapitov/start/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +86,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -142,7 +153,7 @@
       <workItem from="1632732461013" duration="611000" />
       <workItem from="1632733127491" duration="209000" />
       <workItem from="1632733458777" duration="5114000" />
-      <workItem from="1673633018750" duration="29549000" />
+      <workItem from="1673633018750" duration="40411000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1623746857320</created>
@@ -221,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673718942476</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="24/01/23 00:34">
+      <created>1674495261015</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1674495261015</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,7 +264,8 @@
     <MESSAGE value="07/07/21 16:53" />
     <MESSAGE value="09/07/21 17:37" />
     <MESSAGE value="15/01/23 00:55" />
-    <option name="LAST_COMMIT_MESSAGE" value="15/01/23 00:55" />
+    <MESSAGE value="24/01/23 00:34" />
+    <option name="LAST_COMMIT_MESSAGE" value="24/01/23 00:34" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

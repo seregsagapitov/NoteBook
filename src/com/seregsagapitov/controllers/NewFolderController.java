@@ -30,8 +30,6 @@ public class NewFolderController {
         Node sourse = (Node) event.getSource();
         Stage stage = (Stage) sourse.getScene().getWindow();
         stage.close();
-
-
         Main main = new Main();
         resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
         main.createGUI(LocaleManager.currentLanguage.getLocale());
@@ -40,7 +38,6 @@ public class NewFolderController {
     @FXML
     void closeWindowNewFolder(ActionEvent event) {
         actionClose(event);
-
     }
 
     @FXML
@@ -65,17 +62,12 @@ public class NewFolderController {
         ps.setString(1, Controller.currentTable);
         ps.setString(2, labelNewFolder.getText());
 
-
-//
-
         if (!labelNewFolder.getText().equals("")) {
 
             if (!Controller.dataTable.containsValue(labelNewFolder.getText())) {
                 Controller.dataTable.put(Controller.currentTable, labelNewFolder.getText());
                 ConnectDB.showData(CollectionNote.noteList);
                 columnNotesNewFolder.setText(Controller.dataTable.get(Controller.currentTable));
-
-
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 DialogPane dialogPane = alert.getDialogPane();
@@ -103,9 +95,7 @@ public class NewFolderController {
                 labelNewFolder.clear();
                 return;
             }
-
         }
-
 
         System.out.println(Controller.dataTable.get(Controller.currentTable) + " новая папка");
         labelNewFolder.clear();
@@ -113,9 +103,6 @@ public class NewFolderController {
         ps.close();
         ConnectDB.disconnect();
         actionClose(event);
-
-
         System.out.println(Controller.count);
     }
-
 }

@@ -26,7 +26,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
 
-import java.awt.event.MouseEvent;
 import java.io.*;
 import java.net.URL;
 import java.nio.file.*;
@@ -58,11 +57,8 @@ public class Controller extends Observable implements Initializable {
     private Button searchButton;
     @FXML
     private Button newFolderButton;
-
-
     @FXML
     private ComboBox<Language> comboLocales;
-
     @FXML
     Button clearRecButton;
 
@@ -85,13 +81,10 @@ public class Controller extends Observable implements Initializable {
     private MenuButton menuButton_folder;
     @FXML
     private AnchorPane MainAnchorPain;
-
     @FXML
     private MenuItem exportZipItem;
-
     @FXML
     private TextField filterField;
-
     @FXML
     private PasswordField setPass;
     @FXML
@@ -125,10 +118,9 @@ public class Controller extends Observable implements Initializable {
 
 
     static {
-        dataTable.put("NOTES", "Мои заметки / My Notes");
-        dataTable.put("RECYCLED", "Корзина / Recycled");
+        dataTable.put("NOTES", "Мои заметки _ My Notes");
+        dataTable.put("RECYCLED", "Корзина _ Recycled");
         currentTable = "NOTES";
-
     }
 
     @FXML
@@ -164,11 +156,8 @@ public class Controller extends Observable implements Initializable {
 
         collectionNote.fillTestData();
 
-
         tableNote.setItems(collectionNote.getNoteList());
         updateCountLabel();
-
-
         ConnectDB.feelDataDB();
 
 
@@ -204,21 +193,17 @@ public class Controller extends Observable implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-
                 for (MenuItem item : menuButton.getItems()) {
                     item.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
 
-
                             if (item.getText().equals(resourceBundle.getString("AboutProg"))) {
                                 openAboutProg(event);
                             }
-
                             if (item.getText().equals(resourceBundle.getString("SelectFolder"))) {
                                 selectFolderMenu(event);
                             }
-
                             if (item.getText().equals(resourceBundle.getString("Recycled"))) {
                                 currentTable = "RECYCLED";
                                 try {
@@ -231,14 +216,11 @@ public class Controller extends Observable implements Initializable {
                                 delButton.setDisable(true);
                                 addButton.setDisable(true);
                                 clearRecButton.setVisible(true);
-
-
                             }
 
                             if (item.getText().equals(resourceBundle.getString("ExportZipFile"))) {
                                 exportToZipFile(event);
                             }
-
                             if (item.getText().equals(resourceBundle.getString("Password"))) {
                                 if (setPasswordStage == null) {
                                     setPasswordStage = new Stage();
@@ -256,12 +238,10 @@ public class Controller extends Observable implements Initializable {
                                     setPasswordStage.setScene(new Scene(fxmlSetPass, 300, 150));
                                     setPasswordStage.initModality(Modality.WINDOW_MODAL);
                                     setPasswordStage.showAndWait();
-
                                 } else {
                                     setPasswordStage.show();
                                 }
                             }
-
 
                             if (item.getText().equals(resourceBundle.getString("Exit"))) {
                                 System.exit(0);
@@ -279,7 +259,6 @@ public class Controller extends Observable implements Initializable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-
                 for (MenuItem item : menuButton_folder.getItems()) {
                     item.setOnAction(new EventHandler<ActionEvent>() {
                         @Override
@@ -313,7 +292,6 @@ public class Controller extends Observable implements Initializable {
 
                                 dataTable.remove(s1);
                                 System.out.println(dataTable);
-
                                 currentTable = "NOTES";
                                 if (currentTable == "NOTES") {
                                     menuButton_folder.getItems().get(1).setDisable(true);
@@ -343,14 +321,12 @@ public class Controller extends Observable implements Initializable {
                     public void handle(ActionEvent event) {
                         Language selectedLang = (Language) comboLocales.getSelectionModel().getSelectedItem();
                         LocaleManager.setCurrentLanguage(selectedLang);
-
                         // уведомить всех слушателей, что произошла смена языка
                         setChanged();
                         notifyObservers(selectedLang);
                         System.out.println("Изменение языка");
                     }
                 });
-
             }
         });
     }
@@ -359,7 +335,6 @@ public class Controller extends Observable implements Initializable {
     @FXML
     void openSetPassWindow(ActionEvent event) {
         Window parentWindow = ((Node) event.getSource()).getScene().getWindow();
-
         if (setPasswordStage == null) {
             setPasswordStage = new Stage();
             setPasswordStage.setTitle(resourceBundle.getString("SetPassword"));
@@ -368,7 +343,6 @@ public class Controller extends Observable implements Initializable {
             setPasswordStage.initModality(Modality.WINDOW_MODAL);
             setPasswordStage.getScene().getStylesheets().add((Main.class.getResource("../css/example.css")).toExternalForm());
             setPasswordStage.initOwner(parentWindow);
-
             setPasswordStage.showAndWait();
         } else {
             setPasswordStage.show();
@@ -389,7 +363,6 @@ public class Controller extends Observable implements Initializable {
         }
         Scene scene = new Scene(root);
         ((Stage) addButton.getScene().getWindow()).setScene(scene);
-
     }
 
     @FXML
@@ -397,18 +370,14 @@ public class Controller extends Observable implements Initializable {
         tableNote.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 Parent root = null;
-
                 if (tableNote.getSelectionModel().getSelectedItem() != null) {
                     try {
-
                         ResourceBundle resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER, LocaleManager.currentLanguage.getLocale());
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/editNote.fxml"), resourceBundle);
                         root = loader.load();
                         Scene scene = new Scene(root);
                         ((Stage) addButton.getScene().getWindow()).setScene(scene);
                         editController = loader.getController();
-
-
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -431,8 +400,6 @@ public class Controller extends Observable implements Initializable {
                         e.printStackTrace();
                     }
                 }
-
-
             }
         });
     }
@@ -441,25 +408,45 @@ public class Controller extends Observable implements Initializable {
     void delNote(ActionEvent event) {
         ObservableList<Note> selectedNotes = tableNote.getSelectionModel().getSelectedItems();
         ArrayList<Note> rows = new ArrayList<>(selectedNotes);
-
-        collectionNote.delete(rows);
-//
+        if (rows.size() != 0) {
+            collectionNote.delete(rows);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            if (LocaleManager.getCurrentLanguage().getCode().equals("ru")) {
+                alert.setHeaderText("Запись не выбрана!");
+            } else {
+                alert.setHeaderText("The note is not selected!");
+            }
+            alert.showAndWait();
+            return;
+        }
     }
-
 
     public void updateCountLabel() {
         labelCount.setText(resourceBundle.getString("Count") + ": " + collectionNote.getNoteList().size());
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////
     @FXML
     void replaceNote(ActionEvent event) {
-//        ObservableList<Note> selectedNotes = tableNote.getSelectionModel().getSelectedItems();
-//        ArrayList<Note> rows = new ArrayList<>(selectedNotes);
-        replaceOn = true;
-        selectFolderMenu(event);
-///////////////////////////////////////////////////////////////////////////////
-
+        ObservableList<Note> selectedNotes = tableNote.getSelectionModel().getSelectedItems();
+        ArrayList<Note> rows = new ArrayList<>(selectedNotes);
+        if (rows.size() != 0) {
+            replaceOn = true;
+            selectFolderMenu(event);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            DialogPane dialogPane = alert.getDialogPane();
+            dialogPane.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            if (LocaleManager.getCurrentLanguage().getCode().equals("ru")) {
+                alert.setHeaderText("Запись не выбрана!");
+            } else {
+                alert.setHeaderText("The note is not selected!");
+            }
+            alert.showAndWait();
+            return;
+        }
     }
 
     // Открытие информационного окна о программе
@@ -544,7 +531,6 @@ public class Controller extends Observable implements Initializable {
                         "The database used is SQLite.";
             }
 
-
             aboutProgController.TextAreaAboutProgramm.setText(context);
             stage.setTitle(resourceBundle.getString("AboutProg"));
             stage.setScene(new Scene(root, 700, 400));
@@ -554,8 +540,6 @@ public class Controller extends Observable implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
 
@@ -588,7 +572,6 @@ public class Controller extends Observable implements Initializable {
         }
     }
 
-
     // Заолнение таблицы данными
     public void fillSelectList() {
         selectFolderController = new selectFolderController();
@@ -596,12 +579,10 @@ public class Controller extends Observable implements Initializable {
             String value = String.valueOf(entry.getValue());
             selectFolderController.getListViewSelectFolder().getItems().add(value);
         }
-        // fillLangCombobox();
     }
 
 
     // Сохранение данных приложения в Zip-файл
-
     @FXML
     private void exportToZipFile(ActionEvent event) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -629,11 +610,6 @@ public class Controller extends Observable implements Initializable {
         ConnectDB.connect();
         for (Map.Entry<String, String> entry : dataTable.entrySet()) {
             Path path = Paths.get(pathRoot + "/" + dataTable.get(entry.getKey()));
-//            try {
-//                //Files.createDirectory(Paths.get(pathRoot + "/" + path));
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
             System.out.println("Key: " + entry.getKey() + " Value: " + entry.getValue());
             try {
                 Statement stmt = ConnectDB.connection.createStatement();
@@ -649,10 +625,8 @@ public class Controller extends Observable implements Initializable {
 
             String fileName1 = "";
 
-
             try {
                 for (int i = 0; i < noteList.size(); i++) {
-
                     try {
                         Files.createDirectories(path);
                     } catch (IOException e) {
@@ -709,7 +683,6 @@ public class Controller extends Observable implements Initializable {
         ZipOutputStream zout = new ZipOutputStream(fout);
         zout.setLevel(Deflater.BEST_COMPRESSION);
 
-
         // Создание объекта File object архивируемой директории
         File fileSource = new File(source_dir);
         addDirectory(zout, fileSource);
@@ -744,14 +717,12 @@ public class Controller extends Observable implements Initializable {
             fis.close();
         }
     }
-    // Создание информационного окна
 
+    // Создание информационного окна
     public void createAlertMessage(String title, String headerText, String contentText) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-
         alert.setTitle(title);
         alert.setHeaderText(headerText);
         alert.setContentText(contentText);
@@ -792,8 +763,6 @@ public class Controller extends Observable implements Initializable {
             } else {
                 createAlertMessage("The Recycled is cleared", "The Recycled has been successfully cleared!", "Deleted " + sizeRecycled + " records");
             }
-
-
         } else {
             alert.close();
         }

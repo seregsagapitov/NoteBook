@@ -22,30 +22,20 @@ import java.util.ResourceBundle;
 
 public class NewNoteController {
 
-
     ResourceBundle resourceBundle;
     @FXML
     private AnchorPane MainAnchorPain;
-
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMM yyyy г HH:mm:ss");
-    CollectionNote collectionNote = new CollectionNote();
-
     @FXML
     private TextArea textAreaFX;
 
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMM yyyy г HH:mm:ss");
+    CollectionNote collectionNote = new CollectionNote();
 
     void actionClose(ActionEvent event) {
         try {
             Main main = new Main();
             resourceBundle = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
             main.createGUI(LocaleManager.currentLanguage.getLocale());
-
-//            Parent root = null;
-//            ResourceBundle resources = ResourceBundle.getBundle(Main.BUNDLES_FOLDER);
-//            root = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"), resources);
-//            Scene scene = new Scene(root);
-//            ((Stage) MainAnchorPain.getScene().getWindow()).setScene(scene);
-
         } catch (Exception e) {
             e.printStackTrace();
         }

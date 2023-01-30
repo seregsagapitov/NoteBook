@@ -10,10 +10,8 @@ public class Note {
     private SimpleStringProperty currentMoment = new SimpleStringProperty("");
     private SimpleStringProperty title = new SimpleStringProperty("");
     private Integer id;
-    //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("d MMM. yyyy г HH:mm:ss");
 
     public Note(SimpleStringProperty noteText) {
-
     }
 
     public Note(Integer id) {
@@ -65,7 +63,6 @@ public class Note {
         return currentMoment.get();
     }
 
-
     public void setCurrentMoment(String currentMoment) {
         this.currentMoment.set(currentMoment);
     }
@@ -91,6 +88,4 @@ public class Note {
     public Integer getId() {
         return id;
     }
-
-
 }

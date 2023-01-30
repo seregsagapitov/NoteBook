@@ -21,7 +21,7 @@ public class selectFolderController {
     public TableColumn<Note, String> columnNotesSelectFolder;
     public MenuButton menuButton_folder_1;
     TableView<Note> tableNote;
-       CollectionNote collectionNote = new CollectionNote();
+    CollectionNote collectionNote = new CollectionNote();
     Button delButton;
     Button addButton;
     Button clearRecButton;
@@ -65,18 +65,13 @@ public class selectFolderController {
     void listViewSelectItem() {
         ObservableList selectedIndices = listViewSelectFolder.getSelectionModel().getSelectedIndices();
         for (Object o : selectedIndices) {
-            //System.out.println("o = " + o + " (" + o.getClass() + ")");
-
-
             if (Controller.replaceOn == true) {
 
                 ObservableList<Note> selectedNotes = tableNote.getSelectionModel().getSelectedItems();
                 ArrayList<Note> rows = new ArrayList<>(selectedNotes);
-
                 String newTable = (String) Controller.dataTable.keySet().toArray()[(int) o];
                 System.out.println("Перемещаем в выбранную папку " + newTable);
                 collectionNote.replace(rows, newTable);
-
                 Controller.currentTable = newTable;
                 Controller.replaceOn = false;
             }
@@ -90,15 +85,11 @@ public class selectFolderController {
                     addButton.setDisable(false);
                     delButton.setDisable(false);
                     clearRecButton.setVisible(false);
-                }
-                else {addButton.setDisable(true);
+                } else {
+                    addButton.setDisable(true);
                     delButton.setDisable(true);
                     clearRecButton.setVisible(true);
-//                    if (collectionNote.getNoteList().isEmpty()){
-//                        clearRecButton.setDisable(false);
-//                    }
-
-                    }
+                }
 
                 if (Controller.currentTable != "NOTES" && Controller.currentTable != "RECYCLED") {
                     menuButton_folder_1.getItems().get(1).setDisable(false);

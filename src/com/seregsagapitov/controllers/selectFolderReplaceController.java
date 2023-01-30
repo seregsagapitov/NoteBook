@@ -22,7 +22,6 @@ public class selectFolderReplaceController {
     public MenuButton menuButton_folder_1;
     public CollectionNote collectionNote;
 
-
     @FXML
     ListView<String> listViewSelectFolder;
 
@@ -44,7 +43,6 @@ public class selectFolderReplaceController {
     @FXML
     void buttonSelect(ActionEvent event) {
         listViewSelectItem();
-        //listSelectToReplace();
         actionCloseButton(event);
     }
 
@@ -65,8 +63,6 @@ public class selectFolderReplaceController {
         for (Object o : selectedIndices) {
             //System.out.println("o = " + o + " (" + o.getClass() + ")");
             Controller.currentTable = (String) Controller.dataTable.keySet().toArray()[(int) o];
-
-
             try {
                 ConnectDB.showData(CollectionNote.noteList);
                 columnNotesSelectFolder.setText(Controller.dataTable.get(Controller.currentTable));
@@ -83,16 +79,12 @@ public class selectFolderReplaceController {
     }
 
     String listSelectToReplace() {
-
         String selectTable = "";
         ObservableList selectedIndices = listViewSelectFolder.getSelectionModel().getSelectedIndices();
         for (Object o : selectedIndices) {
             //System.out.println("o = " + o + " (" + o.getClass() + ")");
             selectTable = (String) Controller.dataTable.keySet().toArray()[(int) o];
-
-
         }
-
         return selectTable;
     }
 
